@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SES Terminale — Fiches de Révision Bac</title>
+<style>
+:root {
+  --bg: #0f1117;
+  --bg2: #161820;
+  --bg3: #1e2030;
+  --bg4: #252840;
+  --border: rgba(255,255,255,0.07);
+  --text: #e8eaf6;
+  --text2: #9fa8c4;
+  --text3: #6b7494;
+  --accent:  #7c83fc;
+  --accent2: #5de8a0;
+  --accent3: #f0c040;
+  --accent4: #f0707a;
+  --accent5: #a78bfa;
+  --sidebar-w: 280px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width:100%; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+
+/* === LAYOUT === */
+.app { display: flex; height: 100vh; }
+
+/* === SIDEBAR === */
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.sidebar-header {
+  padding: 1.5rem 1.25rem 1rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.sidebar-logo {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+.sidebar-logo span { color: var(--text2); font-weight: 400; }
+.sidebar-subtitle {
+  font-size: 0.68rem;
+  color: var(--text3);
+  margin-top: 0.3rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.sidebar-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem 0.75rem;
+}
+.sidebar-scroll::-webkit-scrollbar { width: 4px; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 4px; }
+
+.chapter-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  background: transparent;
+  border: none;
+  border-radius: 10px;
+  color: var(--text2);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  margin-bottom: 2px;
+  line-height: 1.4;
+}
+.chapter-btn:hover { background: var(--bg3); color: var(--text); }
+.chapter-btn.active { background: rgba(124,131,252,0.15); color: var(--accent); }
+.chapter-num {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--bg4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-top: 1px;
+}
+.chapter-btn.active .chapter-num { background: var(--accent); color: #fff; }
+
+/* === MAIN === */
+.main {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg);
+}
+.main::-webkit-scrollbar { width: 6px; }
+.main::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 4px; }
+
+/* === WELCOME === */
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+.welcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(124,131,252,0.1);
+  border: 1px solid rgba(124,131,252,0.25);
+  color: var(--accent);
+  border-radius: 100px;
+  padding: 0.4rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.welcome h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  color: var(--text);
+  margin-bottom: 1rem;
+  max-width: 600px;
+}
+.welcome h1 em { color: var(--accent); font-style: normal; }
+.welcome p {
+  font-size: 0.9rem;
+  color: var(--text2);
+  line-height: 1.7;
+  max-width: 480px;
+  margin-bottom: 2.5rem;
+}
+.welcome-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  max-width: 700px;
+  width: 100%;
+}
+.welcome-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  text-align: left;
+}
+.welcome-card-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+.welcome-card-title { font-size: 0.78rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+.welcome-card-desc { font-size: 0.7rem; color: var(--text3); line-height: 1.5; }
+
+/* === CHAPTER VIEW === */
+.chapter-view { padding: 2rem 2.5rem 3rem; max-width: 900px; }
+.chapter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.3rem 0.9rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.chapter-title {
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 1.75rem;
+}
+
+/* === TABS === */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 0.6rem 1.1rem 0.7rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text3);
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  margin-bottom: -1px;
+}
+.tab-btn:hover { color: var(--text2); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* === NOTION SECTIONS === */
+.notion-grid { display: flex; flex-direction: column; gap: 1rem; }
+.notion-section {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+}
+.notion-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+}
+.notion-section-header:hover { background: var(--bg3); }
+.notion-section-icon { font-size: 1.1rem; }
+.notion-section-header span:nth-child(2) {
+  flex: 1;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--text);
+}
+.notion-section-arrow {
+  color: var(--text3);
+  font-size: 0.8rem;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.notion-section.open .notion-section-arrow { transform: rotate(180deg); }
+.notion-section-body { display: none; }
+.notion-section.open .notion-section-body { display: block; }
+.notion-section-content {
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.25rem;
+}
+
+/* === CONTENT COMPONENTS === */
+.desc {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text2);
+  margin-bottom: 1.25rem;
+}
+.desc strong { color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; font-size: 0.88rem; }
+
+/* actors list */
+.actors-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.25rem; }
+.actor-row {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+}
+.actor-name { font-weight: 700; font-size: 0.82rem; color: var(--text); margin-bottom: 0.35rem; }
+.actor-desc { font-size: 0.8rem; color: var(--text2); line-height: 1.65; }
+.actor-desc strong { color: var(--text); }
+
+/* kc grid */
+.kc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 0.7rem;
+  margin-bottom: 1.25rem;
+}
+.kc-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+}
+.kc-term { font-weight: 700; font-size: 0.82rem; color: var(--accent3); margin-bottom: 0.4rem; }
+.kc-def { font-size: 0.78rem; color: var(--text2); line-height: 1.6; }
+
+/* auteur row */
+.auteur-row {
+  background: rgba(124,131,252,0.07);
+  border: 1px solid rgba(124,131,252,0.2);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.6rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.auteur-name { font-weight: 700; font-size: 0.78rem; color: var(--accent); flex-shrink: 0; min-width: 140px; }
+.auteur-desc { font-size: 0.78rem; color: var(--text2); line-height: 1.6; }
+
+/* chain */
+.chain { display: flex; flex-direction: column; align-items: center; gap: 0; margin: 1rem 0 1.25rem; }
+.chain-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  width: 100%;
+}
+.chain-num {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+.chain-text { font-size: 0.8rem; color: var(--text2); line-height: 1.6; padding-top: 2px; }
+.chain-text strong { color: var(--text); }
+.chain-arrow {
+  font-size: 1.25rem;
+  color: var(--accent3);
+  line-height: 1.2;
+  padding: 0.15rem 0;
+}
+
+/* tip box */
+.tip-box {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  background: rgba(93,232,160,0.06);
+  border: 1px solid rgba(93,232,160,0.2);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+}
+.tip-icon { font-size: 1.1rem; flex-shrink: 0; }
+.tip-text { font-size: 0.8rem; color: var(--text2); line-height: 1.65; }
+.tip-text strong { color: var(--accent2); }
+
+/* bac grid */
+.bac-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.7rem;
+  margin-top: 1.25rem;
+}
+.bac-box {
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  border: 1px solid transparent;
+}
+.bac-label {
+  font-weight: 700;
+  font-size: 0.7rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.03em;
+}
+.bac-accroche { background: rgba(240,192,64,0.08); border-color: rgba(240,192,64,0.25); color: var(--text2); }
+.bac-accroche .bac-label { color: var(--accent3); }
+.bac-mecanisme { background: rgba(124,131,252,0.08); border-color: rgba(124,131,252,0.25); color: var(--text2); }
+.bac-mecanisme .bac-label { color: var(--accent); }
+.bac-exemple { background: rgba(93,232,160,0.08); border-color: rgba(93,232,160,0.25); color: var(--text2); }
+.bac-exemple .bac-label { color: var(--accent2); }
+.bac-piege { background: rgba(240,112,122,0.08); border-color: rgba(240,112,122,0.25); color: var(--text2); }
+.bac-piege .bac-label { color: var(--accent4); }
+.bac-retenir { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--text2); }
+.bac-retenir .bac-label { color: var(--accent5); }
+.bac-retenir ul { list-style: none; margin-top: 0.25rem; }
+.bac-retenir li { position: relative; padding-left: 1.1em; margin-bottom: 0.25rem; }
+.bac-retenir li::before { content: '›'; position: absolute; left: 0; color: var(--accent5); font-weight: 700; }
+
+/* === QUIZ === */
+.quiz-container { max-width: 600px; }
+.quiz-progress { display: flex; gap: 5px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.qp-dot {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--bg4);
+  min-width: 20px;
+  transition: background 0.2s;
+}
+.qp-dot.done { background: var(--accent2); }
+.qp-dot.current { background: var(--accent); }
+
+.q-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.q-num { font-size: 0.68rem; color: var(--text3); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; margin-bottom: 0.75rem; }
+.q-text { font-size: 0.95rem; font-weight: 700; color: var(--text); line-height: 1.5; margin-bottom: 1.25rem; }
+.q-options { display: flex; flex-direction: column; gap: 0.6rem; }
+.q-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 0.82rem;
+  color: var(--text2);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  line-height: 1.5;
+}
+.q-option:hover:not(:disabled) { background: var(--bg4); border-color: var(--accent); color: var(--text); }
+.q-option.correct { background: rgba(93,232,160,0.12); border-color: var(--accent2); color: var(--text); }
+.q-option.wrong { background: rgba(240,112,122,0.12); border-color: var(--accent4); color: var(--text2); }
+.q-letter {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--bg4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: var(--text3);
+}
+.q-explanation {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(124,131,252,0.08);
+  border: 1px solid rgba(124,131,252,0.2);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: var(--text2);
+  line-height: 1.65;
+}
+.q-explanation.show { display: block; }
+.q-explanation strong { color: var(--accent); }
+.q-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* buttons */
+.btn {
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-secondary { background: var(--bg3); color: var(--text2); border: 1px solid var(--border); }
+.score-badge { font-size: 0.8rem; font-weight: 700; color: var(--accent2); margin-left: auto; }
+
+/* results */
+.results {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+.results-icon { font-size: 3rem; margin-bottom: 1rem; }
+.results-score { font-size: 2.5rem; font-weight: 800; color: var(--accent); margin-bottom: 0.5rem; }
+.results-msg { font-size: 0.9rem; color: var(--text2); }
+
+/* responsive */
+@media (max-width: 768px) {
+  :root { --sidebar-w: 240px; }
+  .chapter-view { padding: 1.25rem 1.25rem 2rem; }
+  .kc-grid { grid-template-columns: 1fr; }
+  .bac-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .sidebar { position: fixed; left: -100%; z-index: 100; transition: left 0.25s; }
+  .sidebar.open { left: 0; }
+  .main { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">SES Terminale <span>Bac</span></div>
+      <div class="sidebar-subtitle">12 chapitres · Révision complète</div>
+    </div>
+    <div class="sidebar-scroll" id="chapter-list"></div>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="welcome" id="welcome">
+      <div class="welcome-badge">🎓 Baccalauréat Général</div>
+      <h1>Fiches de Révision<br><em>SES Terminale</em></h1>
+      <p>Un document de révision complet couvrant l'intégralité du programme officiel. Sélectionne un chapitre dans le menu pour commencer ta révision ou t'entraîner avec le quiz bac.</p>
+      <div class="welcome-grid">
+        <div class="welcome-card">
+          <div class="welcome-card-icon">📚</div>
+          <div class="welcome-card-title">12 Chapitres</div>
+          <div class="welcome-card-desc">Programme complet Terminale générale</div>
+        </div>
+        <div class="welcome-card">
+          <div class="welcome-card-icon">⚙️</div>
+          <div class="welcome-card-title">Mécanismes</div>
+          <div class="welcome-card-desc">Chaînes causales détaillées pour le bac</div>
+        </div>
+        <div class="welcome-card">
+          <div class="welcome-card-icon">🎯</div>
+          <div class="welcome-card-title">Quiz Bac</div>
+          <div class="welcome-card-desc">Questions type baccalauréat avec explications</div>
+        </div>
+        <div class="welcome-card">
+          <div class="welcome-card-icon">⚠️</div>
+          <div class="welcome-card-title">Pièges à éviter</div>
+          <div class="welcome-card-desc">Erreurs fréquentes signalées pour chaque notion</div>
+        </div>
+      </div>
+    </div>
+    <div id="chapter-view" style="display:none;"></div>
+  </main>
+</div>
+
+<script>
+const chapters = [
+  {
+    id: 1,
+    title: "Quels sont les sources et les défis de la croissance économique ?",
+    color: "#f0c040",
+    sections: [
+      {
+        icon: "📈",
+        title: "Les sources de la croissance économique",
+        content: `
+          <p class="desc">La <strong>croissance économique</strong> désigne l'augmentation soutenue et durable de la production d'un pays sur longue période, mesurée conventionnellement par la variation du <strong>PIB en volume</strong> (corrigé de l'inflation). Elle se distingue de l'expansion (court terme) et du développement (transformation structurelle). Sa compréhension repose sur deux grandes sources complémentaires.</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Facteurs de production (croissance extensive)</div>
+              <div class="actor-desc">Le travail (quantité : actifs occupés, durée ; qualité : niveau de formation, santé) et le capital physique (machines, équipements, infrastructures) contribuent directement à la production. Accumuler davantage de ces facteurs fait croître le PIB — c'est la croissance extensive. Cependant, la loi des rendements factoriels décroissants (Solow) limite ce type de croissance : au-delà d'un certain point, ajouter du capital sans innover n'augmente plus le PIB par tête.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Progrès technique — Productivité Globale des Facteurs (croissance intensive)</div>
+              <div class="actor-desc">La PGF (ou résidu de Solow) mesure la part de la croissance non expliquée par l'augmentation des volumes de travail et de capital. C'est l'efficacité avec laquelle on combine ces facteurs. Elle reflète les innovations de procédé, les nouvelles organisations, la diffusion du savoir. Elle est la seule source de croissance durable à long terme selon Solow (1956). En France, la PGF explique historiquement environ 50 à 60 % de la croissance.</div>
+            </div>
+          </div>
+          <div class="auteur-row"><div class="auteur-name">Solow (1956)</div><div class="auteur-desc">Modèle néoclassique : croissance par accumulation de capital puis rendements décroissants → seul le progrès technique exogène permet une croissance durable. Résidu de Solow = part inexpliquée attribuée au PT.</div></div>
+          <div class="auteur-row"><div class="auteur-name">Romer &amp; Lucas (1980-90)</div><div class="auteur-desc">Croissance endogène : le PT est produit de l'intérieur via R&amp;D, capital humain (Lucas) et diffusion des connaissances (externalités). La croissance peut être auto-entretenue.</div></div>
+          <div class="auteur-row"><div class="auteur-name">Arrow (1962) — learning by doing</div><div class="auteur-desc">L'apprentissage par la pratique génère des gains de productivité : produire en grande quantité améliore automatiquement l'efficacité (externalité de connaissance).</div></div>
+          <p class="desc" style="margin-top:.8rem;"><strong>Mécanisme chaîne causale :</strong></p>
+          <div class="chain">
+            <div class="chain-step"><div class="chain-num">①</div><div class="chain-text">Investissement en R&amp;D et formation du capital humain</div></div>
+            <div class="chain-arrow">↓</div>
+            <div class="chain-step"><div class="chain-num">②</div><div class="chain-text">Innovation technologique et diffusion des connaissances (externalités positives)</div></div>
+            <div class="chain-arrow">↓</div>
+            <div class="chain-step"><div class="chain-num">③</div><div class="chain-text">Hausse de la PGF : on produit plus avec les mêmes facteurs</div></div>
+            <div class="chain-arrow">↓</div>
+            <div class="chain-step"><div class="chain-num">④</div><div class="chain-text">Croissance du PIB durable à long terme (sans butée des rendements décroissants)</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">💡</div>
+            <div class="tip-text"><strong>Lien clé :</strong> La différence entre Solow et les théoriciens endogènes : pour Solow, le PT est exogène (tombé du ciel). Pour Romer/Lucas, il est endogène et peut être stimulé par des politiques publiques (subventions à la R&amp;D, éducation). D'où l'enjeu politique majeur.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:1rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« Si l'accumulation de machines peut faire croître une économie, seule l'innovation technologique lui permet de ne pas s'essouffler. »</div>
+            <div class="bac-box bac-exemple"><div class="bac-label">📌 Exemple mobilisable</div>La France consacre environ 2,2 % de son PIB à la R&amp;D (objectif de Lisbonne : 3 %). Les États-Unis et la Corée du Sud, avec 3 % et plus, affichent une croissance de la PGF plus élevée.</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Confondre croissance du PIB et croissance du PIB par habitant. Une économie peut croître en volume total mais stagner en niveau de vie si la population augmente plus vite.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>La croissance = accumulation facteurs + progrès technique (PGF = résidu de Solow)</li><li>À long terme : seul le PT explique la croissance durable (rendements décroissants du capital)</li><li>Théories endogènes : le PT est produit par la R&amp;D, le capital humain et les externalités</li><li>Le PIB est insuffisant : IDH, BIP 40, empreinte écologique complètent l'analyse</li><li>La croissance est confrontée à un double défi : soutenabilité écologique et inégalités</li></ul></div>
+          </div>`
+      },
+      {
+        icon: "🔑",
+        title: "Concepts clés et mesure de la croissance",
+        content: `
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">PIB (nominal vs réel)</div><div class="kc-def">Valeur ajoutée totale produite sur un territoire en un an. PIB réel = corrigé de l'inflation (déflateur du PIB). Seul le PIB réel mesure la croissance de la production physique.</div></div>
+            <div class="kc-card"><div class="kc-term">IDH</div><div class="kc-def">Indicateur de Développement Humain (PNUD, 1990) : synthèse de 3 dimensions — revenu/hab (PIB), santé (espérance de vie) et éducation (années de scolarisation). Va de 0 à 1. Plus complet que le PIB.</div></div>
+            <div class="kc-card"><div class="kc-term">PGF / Résidu de Solow</div><div class="kc-def">Part de la croissance non expliquée par travail + capital. Estimée par : Δ PIB – (part travail × Δ L) – (part capital × Δ K). Reflète l'efficacité globale et le progrès technique.</div></div>
+            <div class="kc-card"><div class="kc-term">Capital humain</div><div class="kc-def">Ensemble des compétences, connaissances, savoirs-faire et état de santé des individus. Source endogène de croissance (Lucas). Transmis par éducation, formation et expérience.</div></div>
+            <div class="kc-card"><div class="kc-term">Externalités de connaissance</div><div class="kc-def">Une innovation bénéficie à d'autres entreprises que l'innovateur (diffusion du savoir). Effet positif non marchand → justifie une intervention publique (financement de la R&amp;D de base).</div></div>
+            <div class="kc-card"><div class="kc-term">Développement durable</div><div class="kc-def">Développement qui satisfait les besoins présents sans compromettre la capacité des générations futures (rapport Brundtland, 1987). Repose sur 3 piliers : économique, social, environnemental.</div></div>
+            <div class="kc-card"><div class="kc-term">Soutenabilité faible vs forte</div><div class="kc-def">Faible (Solow) : le capital naturel peut être remplacé par du capital artificiel. Forte (Daly) : certaines ressources naturelles critiques sont irremplaçables → à préserver absolument.</div></div>
+            <div class="kc-card"><div class="kc-term">Empreinte écologique</div><div class="kc-def">Surface bioproductive nécessaire pour fournir les ressources consommées et absorber les déchets produits. Si > biocapacité de la Terre → insoutenable. En 2024, dépassée dès mi-juillet.</div></div>
+          </div>`
+      },
+      {
+        icon: "⚠️",
+        title: "Les défis de la croissance : soutenabilité et inégalités",
+        content: `
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent3);">
+              <div class="actor-name">Soutenabilité écologique</div>
+              <div class="actor-desc">La croissance intensive en énergie fossile génère des externalités négatives globales (CO₂ → réchauffement climatique, perte de biodiversité, épuisement des ressources). Le GIEC (2023) confirme que le réchauffement dépasse déjà +1,1°C. Les ODD de l'ONU (17 objectifs, Agenda 2030) et la transition énergétique constituent les réponses institutionnelles. Débat : peut-on découpler croissance et empreinte carbone (découplage absolu) ?</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Inégalités et courbe de Kuznets</div>
+              <div class="actor-desc">Simon Kuznets (1955) : lors des premières phases d'industrialisation, les inégalités augmentent puis diminuent avec le développement (courbe en U inversé). Mais les travaux de Piketty (Le Capital au XXIe siècle, 2013) montrent un retour à la hausse des inégalités dans les pays riches depuis les années 1980, notamment du fait de la montée du capital par rapport au travail (r &gt; g).</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Limites des indicateurs classiques</div>
+              <div class="actor-desc">Le PIB ne mesure pas : le bien-être subjectif, la répartition des revenus, les activités non marchandes (bénévolat), les dégradations environnementales. D'où des indicateurs alternatifs : BIP 40 (inégalités), empreinte écologique, Indicateur de Bien-être Soutenable (IBWS), Rapport Stiglitz-Sen-Fitoussi (2009) sur "les limites du PIB".</div>
+            </div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">🔗</div>
+            <div class="tip-text"><strong>Lien interdisciplinaire :</strong> Le chapitre sur la croissance est directement lié au chapitre sur l'environnement (Ch. 12). La notion d'externalité négative de la pollution est le pont entre les deux : la croissance non régulée génère des coûts externes non internalisés par le marché.</div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "Quelle est la principale limite du PIB comme indicateur de développement ?", opts: ["Il ne mesure pas les inégalités, le bien-être ni les dégradations environnementales","Il surestime toujours la croissance réelle","Il ne prend pas en compte les importations","Il est exprimé en monnaie nationale uniquement"], ans: 0, exp: "Le PIB mesure la richesse produite mais ignore les inégalités de distribution, le bien-être subjectif et les coûts environnementaux. Le rapport Stiglitz-Sen-Fitoussi (2009) a formalisé ces limites. D'où l'intérêt d'indicateurs alternatifs comme l'IDH ou l'empreinte écologique." },
+      { q: "Selon Solow, qu'est-ce qui explique la croissance à long terme ?", opts: ["L'accumulation du capital uniquement","L'augmentation de la population active","Le progrès technique (PGF)","La consommation des ménages"], ans: 2, exp: "Solow (1956) montre que l'accumulation de capital produit des rendements décroissants : au-delà d'un certain seuil, ajouter du capital n'augmente plus la croissance par tête. Seul le progrès technique (résidu de Solow / PGF) permet une croissance durable à long terme." },
+      { q: "Qu'est-ce que la croissance endogène ?", opts: ["Une croissance financée par l'État","Une croissance qui intègre le progrès technique comme facteur interne (R&D, capital humain)","Une croissance fondée uniquement sur les exportations","Une croissance sans inflation"], ans: 1, exp: "Les théoriciens de la croissance endogène (Romer, Lucas, années 1980-90) montrent que le progrès technique est produit 'de l'intérieur' par les entreprises via la R&D, les externalités de connaissance et le capital humain — et non par des facteurs extérieurs à l'économie comme chez Solow." },
+      { q: "Le développement durable est défini par le rapport Brundtland comme :", opts: ["Une croissance annuelle d'au moins 3%","Un développement qui satisfait les besoins présents sans compromettre ceux des générations futures","L'élimination totale de la pauvreté mondiale","Un développement fondé uniquement sur les énergies renouvelables"], ans: 1, exp: "La définition du rapport Brundtland (1987) est fondamentale au bac : le développement durable répond aux besoins du présent sans compromettre la capacité des générations futures à répondre aux leurs. Les 3 piliers : économique, social, environnemental." },
+      { q: "Que mesure la Productivité Globale des Facteurs (PGF) ?", opts: ["Le ratio capital/travail dans une économie","L'efficacité avec laquelle on combine travail et capital (résidu inexpliqué)","Le PIB par habitant","Le niveau moyen des salaires"], ans: 1, exp: "La PGF (résidu de Solow) = part de la croissance non expliquée par l'augmentation des volumes de travail et de capital. Elle est estimée par soustraction et reflète principalement le progrès technique, l'organisation, l'innovation." },
+      { q: "La thèse de Piketty (2013) sur les inégalités affirme que :", opts: ["Les inégalités diminuent naturellement avec la croissance (Kuznets)","Le retour du capital (r > g) alimente la hausse des inégalités de patrimoine dans les pays développés","La mondialisation réduit les inégalités mondiales","Les inégalités n'ont pas de lien avec la croissance économique"], ans: 1, exp: "Dans Le Capital au XXIe siècle (2013), Piketty montre que lorsque le rendement du capital (r) est supérieur au taux de croissance (g), les inégalités de patrimoine augmentent tendanciellement. Ce mécanisme contredit la courbe de Kuznets." }
+    ]
+  },
+  {
+    id: 2,
+    title: "Quels sont les fondements du commerce international et de l'internationalisation de la production ?",
+    color: "#4fa3f7",
+    sections: [
+      {
+        icon: "🌍",
+        title: "Les théories du commerce international",
+        content: `
+          <p class="desc">Le commerce international repose sur un ensemble de théories qui visent à expliquer pourquoi et comment les pays échangent. Ces théories ont des implications politiques directes (libre-échange vs protectionnisme).</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Avantage absolu — Smith (1776)</div>
+              <div class="actor-desc">Dans La Richesse des Nations, Adam Smith montre que chaque pays doit se spécialiser dans ce qu'il produit avec le moins de travail (coût absolu le plus faible). Si chaque pays se spécialise là où il est absolument le meilleur, la production mondiale augmente. Limite : que faire si un pays est moins efficace dans tout ?</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Avantage comparatif — Ricardo (1817)</div>
+              <div class="actor-desc">Dans Principes d'économie politique, Ricardo répond à Smith : même si un pays est moins efficace dans absolument tout, il a intérêt à se spécialiser dans ce qu'il produit avec le moindre désavantage relatif. L'échange est mutuellement bénéfique même entre pays inégaux en productivité. Mécanisme : coût d'opportunité — c'est le coût de ce à quoi on renonce en choisissant une spécialisation.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Dotation en facteurs — HOS (Heckscher, Ohlin, Samuelson)</div>
+              <div class="actor-desc">Les pays exportent les biens dont la production est intensive en leurs facteurs abondants. Un pays riche en travail peu qualifié (ex : Bangladesh) exporte des textiles. Un pays riche en capital (ex : Allemagne) exporte des machines. Le théorème d'égalisation des prix des facteurs (Samuelson) prédit que le libre-échange tend à égaliser les salaires mondiaux.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent3);">
+              <div class="actor-name">Commerce intra-branche — Krugman (1979)</div>
+              <div class="actor-desc">Les modèles classiques n'expliquent pas les échanges entre pays similaires (ex : France et Allemagne s'échangent des voitures). Krugman introduit les économies d'échelle et la différenciation des produits : chaque pays se spécialise dans une variété particulière du même bien. Prix Nobel 2008. Ce commerce intra-branche représente aujourd'hui la majorité des échanges entre pays développés.</div>
+            </div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">🔗</div>
+            <div class="tip-text"><strong>Lien théories / politique :</strong> L'avantage comparatif fonde le libre-échange. Mais Friedrich List (1841) justifie le <strong>protectionnisme éducateur</strong> : protéger temporairement les industries naissantes pour leur permettre d'atteindre la taille critique. Tension structurante de la politique commerciale.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« Selon Ricardo, même un pays moins productif dans tout a intérêt à s'ouvrir aux échanges : c'est le principe de l'avantage comparatif. »</div>
+            <div class="bac-box bac-mecanisme"><div class="bac-label">⚙️ Mécanisme à maîtriser</div>Avantage comparatif : comparer les coûts d'opportunité (pas les coûts absolus). Ex : si le Portugal produit 1 drap en sacrifiant 0,9 vin contre 1 vin pour l'Angleterre qui sacrifie 1,2 drap, chacun se spécialise selon son avantage relatif.</div>
+            <div class="bac-box bac-exemple"><div class="bac-label">📌 Exemple mobilisable</div>Selon l'OMC, le commerce mondial de marchandises représentait 24 000 Mds$ en 2022. La Chine, grâce à ses avantages comparatifs (main-d'œuvre), est devenue le 1er exportateur mondial.</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas confondre avantage absolu (Smith) et comparatif (Ricardo). L'avantage absolu raisonne en coûts totaux ; le comparatif en coûts d'opportunité relatifs. Ricardo dépasse et complète Smith.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>Smith : avantage absolu — Ricardo : avantage comparatif (même si inégaux, l'échange est bénéfique)</li><li>HOS : dotation factorielle explique la spécialisation par les ressources disponibles</li><li>Krugman : commerce intra-branche entre pays similaires (économies d'échelle + différenciation)</li><li>FMN et IDE : acteurs centraux de l'internationalisation, chaînes de valeur mondiales</li><li>Débat libre-échange (avantage comparatif) vs protectionnisme éducateur (List)</li></ul></div>
+          </div>`
+      },
+      {
+        icon: "🏭",
+        title: "L'internationalisation de la production",
+        content: `
+          <p class="desc">Depuis les années 1970-80, la mondialisation de la production s'est considérablement accélérée avec la libéralisation des échanges, les révolutions du transport et du numérique, et l'émergence des pays en développement.</p>
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">FMN (Firme Multinationale)</div><div class="kc-def">Entreprise qui produit dans plusieurs pays via des filiales. Les 100 plus grandes FMN contrôlent environ 20 % du PIB mondial. Ex : Apple, Toyota, LVMH. Acteur central de la mondialisation.</div></div>
+            <div class="kc-card"><div class="kc-term">IDE (Investissement Direct à l'Étranger)</div><div class="kc-def">Prise de participation durable (≥10 %) dans une entreprise étrangère permettant d'exercer un contrôle ou une influence sur la gestion. À distinguer des investissements de portefeuille (purement financiers, &lt; 10 %).</div></div>
+            <div class="kc-card"><div class="kc-term">Chaîne de valeur mondiale (CVM)</div><div class="kc-def">Décomposition internationale du processus productif : R&amp;D, conception, fabrication, assemblage, commercialisation sont localisés dans des pays différents selon leurs avantages comparatifs. Ex : iPhone conçu aux USA, assemblé en Chine.</div></div>
+            <div class="kc-card"><div class="kc-term">Délocalisation</div><div class="kc-def">Transfert d'une activité productive vers un autre pays, généralement pour réduire les coûts (travail, fiscalité). À distinguer de l'externalisation (confier à un sous-traitant) qui peut être locale.</div></div>
+            <div class="kc-card"><div class="kc-term">Dumping social</div><div class="kc-def">Concurrence via des coûts salariaux, sociaux ou environnementaux très bas. Sujet de tension entre pays : les pays à bas salaires attirent des FMN au détriment des normes sociales locales.</div></div>
+            <div class="kc-card"><div class="kc-term">OMC</div><div class="kc-def">Organisation Mondiale du Commerce (1995, ex-GATT) : régule le commerce mondial, promeut la libéralisation via les cycles de négociation (Doha) et règle les différends commerciaux entre États membres.</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">⚡</div>
+            <div class="tip-text"><strong>Enjeux contemporains :</strong> La montée des tensions commerciales (guerre commerciale USA-Chine depuis 2018, droits de douane de Trump en 2025) remet en cause le libre-échange. La reshoring (relocalisation) est encouragée pour des raisons de souveraineté économique (semi-conducteurs, médicaments). Le débat libre-échange / protectionnisme reste au cœur de l'actualité.</div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "Selon Ricardo, un pays doit se spécialiser :", opts: ["Dans tous les secteurs où il est le plus efficace","Dans les secteurs où il dispose d'un avantage comparatif (relatif)","Uniquement dans l'agriculture","Dans les secteurs avec le plus de main-d'œuvre"], ans: 1, exp: "Ricardo (1817) montre qu'un pays doit se spécialiser là où il est relativement le plus efficace (avantage comparatif / coût d'opportunité), même s'il est moins efficace que ses partenaires dans l'absolu. Le commerce est toujours mutuellement bénéfique." },
+      { q: "Qu'est-ce qu'un IDE ?", opts: ["Un impôt sur les dividendes étrangers","Un investissement direct à l'étranger (prise de participation ≥10% dans une entreprise étrangère)","Une indemnité de départ à l'étranger","Un indicateur de développement économique"], ans: 1, exp: "L'IDE (Investissement Direct à l'Étranger) est une prise de participation durable dans une entreprise d'un autre pays permettant d'exercer le contrôle ou une influence (seuil conventionnel de 10 %)." },
+      { q: "Le commerce intra-branche (Krugman) désigne :", opts: ["Les échanges entre pays riches et pays pauvres","Les échanges de produits identiques entre pays similaires","Les échanges de produits similaires ou différenciés entre pays de même niveau de développement","Les importations qui dépassent les exportations"], ans: 2, exp: "Le commerce intra-branche (Krugman, 1979) regroupe les échanges portant sur des produits du même secteur entre pays comparables. Il s'explique par les économies d'échelle et la différenciation des produits. Ex : échange de voitures entre France et Allemagne." },
+      { q: "Quel auteur est à l'origine de la théorie de l'avantage absolu ?", opts: ["Ricardo","Heckscher","Adam Smith","Samuelson"], ans: 2, exp: "Adam Smith (La Richesse des Nations, 1776) développe la théorie de l'avantage absolu : chaque pays doit se spécialiser dans ce qu'il produit avec le moins de travail (coût absolu le plus faible)." },
+      { q: "La chaîne de valeur mondiale désigne :", opts: ["La liste des pays membres de l'OMC","La décomposition internationale du processus de production, chaque étape localisée là où elle est la plus efficace","Le classement des pays par PIB","L'ensemble des entreprises d'un même secteur"], ans: 1, exp: "La chaîne de valeur mondiale (GVC) correspond à la fragmentation internationale du processus productif : R&D, fabrication, assemblage, distribution sont réalisés dans des pays différents selon leurs avantages comparatifs. Ex : un iPhone implique une cinquantaine de pays." },
+      { q: "Le protectionnisme éducateur (List) se justifie par :", opts: ["La défense des industries établies contre la concurrence étrangère","La protection temporaire des industries naissantes pour leur permettre d'atteindre la compétitivité","L'interdiction définitive des importations","La protection des consommateurs contre les produits étrangers"], ans: 1, exp: "Friedrich List (1841) justifie un protectionnisme temporaire pour protéger les industries naissantes qui n'ont pas encore atteint la taille critique nécessaire pour concurrencer les industries étrangères établies. Ce protectionnisme doit être provisoire et sélectif." }
+    ]
+  },
+  {
+    id: 3,
+    title: "Comment lutter contre le chômage ?",
+    color: "#e05e6d",
+    sections: [
+      {
+        icon: "📊",
+        title: "Définitions et types de chômage",
+        content: `
+          <p class="desc">Le chômage est un phénomène central du marché du travail dont la mesure et les causes sont débattues. Sa définition précise conditionne les politiques mises en œuvre.</p>
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">Chômage BIT (mesure officielle)</div><div class="kc-def">Trois conditions cumulatives : être sans emploi (ne pas avoir travaillé plus d'1h dans la semaine de référence), être disponible pour travailler dans les 2 semaines, et avoir effectué une démarche active de recherche d'emploi dans les 4 semaines. Taux = (chômeurs BIT / population active) × 100.</div></div>
+            <div class="kc-card"><div class="kc-term">Chômage frictionnel</div><div class="kc-def">Chômage temporaire lié aux délais de transition entre deux emplois. Incompressible dans une économie dynamique. Peut être réduit par de meilleures politiques d'information (matching) et d'accompagnement.</div></div>
+            <div class="kc-card"><div class="kc-term">Chômage structurel</div><div class="kc-def">Inadéquation durable entre l'offre et la demande de travail : en termes de qualifications (mutations technologiques), de secteurs géographiques, ou de rigidités institutionnelles. Plus difficile à résorber que le conjoncturel.</div></div>
+            <div class="kc-card"><div class="kc-term">Chômage conjoncturel (keynésien)</div><div class="kc-def">Résulte d'un ralentissement de l'activité économique (insuffisance de la demande globale). Peut en théorie être résorbé par une politique de relance (budgétaire ou monétaire) soutenant la demande.</div></div>
+            <div class="kc-card"><div class="kc-term">Chômage volontaire (néoclassique)</div><div class="kc-def">Selon les néoclassiques, une personne qui refuse un emploi au salaire d'équilibre du marché est "volontairement" au chômage. Vision très critiquée par l'observation empirique.</div></div>
+            <div class="kc-card"><div class="kc-term">Halo du chômage</div><div class="kc-def">INSEE : personnes ni en emploi ni officiellement chômeurs BIT — chômeurs découragés, en sous-emploi (temps partiel subi), en formation forcée. Révèle l'ampleur réelle du malaise sur le marché du travail (~2 millions de personnes supplémentaires en France).</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">📈</div>
+            <div class="tip-text"><strong>Chiffre clé (2024) :</strong> Le taux de chômage en France (BIT) était de 7,3 % au T4 2024 (source INSEE). Le halo du chômage représente environ 2 millions de personnes supplémentaires non comptabilisées dans ce taux.</div>
+          </div>`
+      },
+      {
+        icon: "🛠️",
+        title: "Les politiques de lutte contre le chômage",
+        content: `
+          <p class="desc">Les politiques de l'emploi diffèrent selon la conception que l'on a des causes du chômage. Deux visions s'affrontent : keynésienne (demande) et néoclassique (offre).</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Politiques de demande (Keynésiennes)</div>
+              <div class="actor-desc"><strong>Logique :</strong> Le chômage résulte d'une insuffisance de la demande effective. Solution : stimuler la demande globale via la dépense publique (relance budgétaire) ou la baisse des taux d'intérêt (relance monétaire). Mécanisme du multiplicateur keynésien : 1 € de dépense publique → augmentation du PIB > 1 €. Efficace sur le chômage conjoncturel. Risques : inflation, déficit public, effet d'éviction.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Politiques de l'offre (Néoclassiques)</div>
+              <div class="actor-desc"><strong>Logique :</strong> Le chômage résulte de rigidités sur le marché du travail qui empêchent le salaire de s'ajuster à l'équilibre. Solutions : flexibilisation du marché (assouplir le droit du travail, alléger les charges patronales, réduire le coût du SMIC), réduire les "trappes à inactivité". Efficace contre le chômage structurel. Critiques : accroît les inégalités, précarise les travailleurs.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Politiques d'emploi actives</div>
+              <div class="actor-desc"><strong>Logique :</strong> Agir directement sur l'employabilité et le matching. Formation professionnelle (CPF), accompagnement individualisé des chômeurs (France Travail / ex-Pôle emploi), subventions à l'embauche (alternance, emplois aidés), aides à la création d'entreprise. Réduisent le chômage structurel et frictionnel.</div>
+            </div>
+          </div>
+          <div class="auteur-row"><div class="auteur-name">Keynes (1936)</div><div class="auteur-desc">Théorie Générale : le chômage involontaire résulte d'une insuffisance de la demande effective. L'État doit intervenir pour relancer via la dépense publique (multiplicateur).</div></div>
+          <div class="auteur-row"><div class="auteur-name">Friedman (1968)</div><div class="auteur-desc">Taux de chômage naturel (NAIRU) : il existe un taux de chômage incompressible lié aux frictions et rigidités structurelles. Toute politique de relance au-delà de ce seuil → inflation.</div></div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« En France, plus de 7 chômeurs sur 100 actifs — mais derrière ce chiffre BIT se cache un halo de 2 millions de personnes supplémentaires en situation précaire. »</div>
+            <div class="bac-box bac-mecanisme"><div class="bac-label">⚙️ Mécanisme à maîtriser</div>Multiplicateur keynésien : État dépense 10 Mds€ → entreprises embauchent → ménages consomment → entreprises embauchent encore… L'effet se démultiplie selon la propension marginale à consommer. Un multiplicateur > 1 justifie la relance.</div>
+            <div class="bac-box bac-exemple"><div class="bac-label">📌 Exemple mobilisable</div>La réforme de l'assurance chômage (2023) en France a durci les conditions d'accès (6 mois de travail minimum) pour inciter à la reprise d'emploi — logique néoclassique de réduction des "trappes à inactivité".</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas présenter le chômage comme ayant une seule cause. La réalité est pluricausale : un chômage peut être à la fois conjoncturel ET structurel. Les politiques efficaces doivent combiner les deux types d'approche.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>Définition BIT : sans emploi + disponible + en recherche active — taux officiel en France ~7 %</li><li>3 types : frictionnel (transition), structurel (inadéquation), conjoncturel (demande insuffisante)</li><li>Keynésiens : relance de la demande ; Néoclassiques : flexibilisation de l'offre</li><li>Halo du chômage : révèle la sous-estimation du malaise sur le marché du travail</li><li>Politiques actives : formation, accompagnement, subventions à l'embauche</li></ul></div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "Selon la définition du BIT, un chômeur est :", opts: ["Toute personne n'ayant pas d'emploi","Une personne sans emploi, disponible et en recherche active d'emploi","Une personne ayant travaillé moins de 35h","Toute personne inscrite à France Travail"], ans: 1, exp: "Le BIT définit le chômeur comme quelqu'un qui cumule trois conditions : être sans emploi (moins d'1h par semaine), être disponible pour travailler rapidement (dans les 2 semaines) et avoir effectué une démarche active de recherche d'emploi (dans les 4 semaines)." },
+      { q: "Le chômage structurel est principalement dû :", opts: ["À une récession économique passagère","À l'inadéquation des qualifications ou aux rigidités du marché du travail","Au refus de travailler des chômeurs","À des grèves prolongées"], ans: 1, exp: "Le chômage structurel est un déséquilibre durable du marché du travail : inadéquation entre les compétences disponibles et celles demandées (mutations technologiques, désindustrialisation), rigidités institutionnelles, ou inadéquation géographique. Il nécessite des politiques actives ciblées." },
+      { q: "Pour les économistes néoclassiques, le chômage résulte principalement de :", opts: ["L'insuffisance de la demande globale","Les rigidités du marché du travail (SMIC trop élevé, protection de l'emploi)","L'excès d'épargne des ménages","La mauvaise gestion des entreprises"], ans: 1, exp: "Les néoclassiques voient le marché du travail comme un marché ordinaire où l'offre et la demande tendent vers un équilibre. Si le chômage persiste, c'est que le prix du travail (salaire) est trop élevé ou que des rigidités institutionnelles empêchent l'ajustement." },
+      { q: "La politique keynésienne de lutte contre le chômage consiste à :", opts: ["Réduire le SMIC pour créer des emplois","Stimuler la demande globale via la dépense publique ou la politique monétaire","Former les chômeurs pour adapter leurs compétences","Baisser les cotisations patronales"], ans: 1, exp: "Keynes (1936) montre que le chômage résulte d'une insuffisance de demande effective. La solution est d'augmenter la demande globale via la dépense publique (multiplicateur budgétaire) ou la baisse des taux (relance monétaire) pour créer de l'emploi." },
+      { q: "Le 'halo du chômage' désigne :", opts: ["Les chômeurs de longue durée","Les personnes proches du chômage mais non comptabilisées dans le taux officiel","L'effet du chômage sur la santé mentale","Les chômeurs saisonniers"], ans: 1, exp: "Le halo du chômage comprend les personnes en situation de sous-emploi ou d'inactivité liée au marché du travail mais non comptabilisées comme chômeuses BIT : inactifs découragés, temps partiels subis, personnes en formation contrainte…" }
+    ]
+  },
+  {
+    id: 4,
+    title: "Comment expliquer les crises financières et réguler le système financier ?",
+    color: "#5de8a0",
+    sections: [
+      {
+        icon: "💸",
+        title: "Le système financier et ses fonctions",
+        content: `
+          <p class="desc">Le système financier assure l'allocation des ressources entre agents à capacité de financement (ménages épargnants) et agents à besoin de financement (entreprises, État). Son bon fonctionnement conditionne la croissance. Mais des asymétries d'information et des comportements spéculatifs le rendent instable.</p>
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">Financement direct (marchés)</div><div class="kc-def">Les agents émettent des titres (actions, obligations) achetés directement par les investisseurs sur les marchés financiers. Plus développé dans les pays anglo-saxons.</div></div>
+            <div class="kc-card"><div class="kc-term">Financement indirect (banques)</div><div class="kc-def">Les banques jouent un rôle d'intermédiaires : elles collectent l'épargne des ménages et accordent des crédits aux entreprises (transformation d'échéances). Modèle dominant en Europe continentale.</div></div>
+            <div class="kc-card"><div class="kc-term">Bulle spéculative</div><div class="kc-def">Hausse auto-entretenue des prix d'actifs (actions, immobilier) déconnectée des fondamentaux économiques, alimentée par des anticipations auto-réalisatrices. Ex : « si les prix montent, j'achète, donc les prix montent encore ».</div></div>
+            <div class="kc-card"><div class="kc-term">Effet de levier</div><div class="kc-def">Utilisation de l'endettement pour amplifier les rendements. Amplificateur en cas de hausse, mais catastrophique en cas de baisse (effacement de la valeur des actifs + remboursement de la dette).</div></div>
+            <div class="kc-card"><div class="kc-term">Aléa moral (moral hazard)</div><div class="kc-def">Comportement risqué d'agents sachant qu'ils seront secourus en cas de problème (too big to fail). Les grandes banques prennent plus de risques parce qu'elles savent que leur faillite serait socialement catastrophique → sauvetage public garanti.</div></div>
+            <div class="kc-card"><div class="kc-term">Asymétrie d'information</div><div class="kc-def">L'emprunteur connaît mieux sa situation que le prêteur. Source d'antisélection (mauvais risques cachés à la souscription) et d'aléa moral (comportement après signature). Déstabilise les marchés financiers.</div></div>
+          </div>`
+      },
+      {
+        icon: "🔥",
+        title: "La crise de 2008 : mécanisme étape par étape",
+        content: `
+          <p class="desc">La crise des subprimes est l'exemple canonique d'une crise financière systémique. Comprendre son mécanisme est incontournable pour le baccalauréat.</p>
+          <div class="chain">
+            <div class="chain-step"><div class="chain-num">①</div><div class="chain-text"><strong>Bulle immobilière (2000-2006) :</strong> Politique monétaire accommodante post-2001 (taux Fed bas), spéculation immobilière. Les banques accordent des crédits subprime à des ménages insolvables avec l'espoir que la hausse de l'immobilier couvre le risque.</div></div>
+            <div class="chain-arrow">↓</div>
+            <div class="chain-step"><div class="chain-num">②</div><div class="chain-text"><strong>Titrisation et dispersion du risque :</strong> Les crédits subprime sont regroupés et transformés en titres financiers complexes (CDO, ABS) revendus à des investisseurs mondiaux. Le risque se disperse — et se dissimule — dans tout le système.</div></div>
+            <div class="chain-arrow">↓</div>
+            <div class="chain-step"><div class="chain-num">③</div><div class="chain-text"><strong>Éclatement de la bulle (2006-2007) :</strong> Les prix de l'immobilier baissent. Les ménages ne peuvent plus rembourser. Les défauts s'accumulent. Les titres CDO perdent leur valeur.</div></div>
+            <div class="chain-arrow">↓</div>
+            <div class="chain-step"><div class="chain-num">④</div><div class="chain-text"><strong>Crise de liquidité interbancaire (2007) :</strong> Les banques ne savent plus quels actifs de leurs partenaires sont toxiques. Méfiance généralisée, fin du prêt interbancaire. Credit crunch (assèchement du crédit).</div></div>
+            <div class="chain-arrow">↓</div>
+            <div class="chain-step"><div class="chain-num">⑤</div><div class="chain-text"><strong>Crise systémique (sept. 2008) :</strong> Faillite de Lehman Brothers (15 septembre 2008). Les marchés mondiaux s'effondrent. Les États et banques centrales interviennent massivement (plans de sauvetage, QE).</div></div>
+            <div class="chain-arrow">↓</div>
+            <div class="chain-step"><div class="chain-num">⑥</div><div class="chain-text"><strong>Récession mondiale et crise des dettes souveraines (2009-2012) :</strong> Le ralentissement économique gonfle les déficits publics. En Europe, la méfiance sur la dette grecque déclenche la crise de l'euro (2010-2012).</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">🧩</div>
+            <div class="tip-text"><strong>Mécanisme clé :</strong> La <strong>titrisation</strong> (transformation de crédits en titres revendus) a propagé le risque à l'ensemble du système financier mondial. L'<strong>aléa moral</strong> (banques too big to fail), l'<strong>asymétrie d'information</strong> (actifs opaques) et l'<strong>effet de levier</strong> excessif sont les trois facteurs aggravants de la crise.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« En septembre 2008, la faillite de Lehman Brothers transforme une crise immobilière américaine en crise financière mondiale — révélant les failles d'un système fondé sur l'opacité et l'aléa moral. »</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas réduire la crise de 2008 à la "cupidité des banquiers". Les causes profondes sont systémiques : dérèglementation, asymétries d'information, titrisation, politique monétaire accommodante, absence de supervision macroprudentielle.</div>
+          </div>`
+      },
+      {
+        icon: "⚖️",
+        title: "Les réponses régulatrices",
+        content: `
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Régulation prudentielle — Bâle III (2010)</div>
+              <div class="actor-desc">Les accords de Bâle III (Comité de Bâle, BRI) renforcent les exigences en fonds propres des banques : ratio CET1 (Common Equity Tier 1) ≥ 4,5 %. Les banques doivent absorber leurs pertes sans faire appel aux États. Complétés par Bâle IV (2023).</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Supervision bancaire — Union bancaire européenne</div>
+              <div class="actor-desc">Depuis 2014, la BCE supervise directement les 115 plus grandes banques de la zone euro (Mécanisme de Surveillance Unique — MSU). Des stress tests réguliers testent leur résistance à des scénarios de crise. Le Mécanisme de Résolution Unique (MRU) gère les faillites bancaires.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Politique macroprudentielle</div>
+              <div class="actor-desc">Surveillance des risques systémiques à l'échelle de l'ensemble du système financier. Outils : coussins de capital contracycliques, limites sur les ratios prêt/valeur, surveillance des bulles. En Europe : Conseil de Stabilité Financière (FSB) et CERS.</div>
+            </div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">🔗</div>
+            <div class="tip-text"><strong>Limites de la régulation :</strong> L'aléa moral reste intact tant que les États "sauvent" les grandes banques. La régulation peut déplacer les risques vers le secteur bancaire parallèle (shadow banking), moins régulé. Débat : faut-il séparer les activités de dépôt et d'investissement (loi Glass-Steagall) ?</div>
+          </div>
+          <div class="bac-box bac-retenir" style="margin-top:.8rem;"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>Bulle spéculative + titrisation + effet de levier + aléa moral → mécanique des crises financières</li><li>2008 : subprimes → titrisation → credit crunch → crise systémique (Lehman) → récession mondiale</li><li>Asymétrie d'information : source fondamentale d'instabilité sur les marchés financiers</li><li>Bâle III : exiger plus de fonds propres pour absorber les chocs</li><li>Union bancaire européenne : supervision centralisée par la BCE depuis 2014</li></ul></div>`
+      }
+    ],
+    quiz: [
+      { q: "Qu'est-ce qu'une bulle spéculative ?", opts: ["Une hausse du PIB liée à la spéculation","Une hausse des prix d'actifs déconnectée des fondamentaux, alimentée par des anticipations auto-réalisatrices","Un mécanisme de protection des marchés financiers","Une forme de financement des entreprises"], ans: 1, exp: "Une bulle spéculative se forme quand les prix d'actifs s'envolent au-delà de leur valeur fondamentale, portés par des anticipations de hausse future. Quand la bulle éclate, les prix chutent brutalement." },
+      { q: "La titrisation désigne :", opts: ["La conversion de monnaie étrangère en euros","La transformation de crédits bancaires en titres vendus sur les marchés","Le rachat d'une entreprise par une autre","La politique de taux d'intérêt de la BCE"], ans: 1, exp: "La titrisation consiste pour une banque à regrouper des crédits et à les transformer en titres financiers (ABS, CDO) revendus aux investisseurs. Elle a permis de diffuser le risque des subprimes à l'ensemble du système financier mondial." },
+      { q: "L'aléa moral dans le secteur bancaire signifie :", opts: ["Les banques refusent de prendre des risques","Les banques prennent des risques excessifs en comptant sur un sauvetage public (too big to fail)","Les banques ne respectent pas les règles comptables","Les épargnants ne sont pas informés des risques"], ans: 1, exp: "L'aléa moral désigne le fait que les agents prennent plus de risques quand ils ne supporteront pas les conséquences négatives. Les grandes banques savent que leur faillite serait trop coûteuse socialement → incitation à prendre des risques excessifs." },
+      { q: "Les accords de Bâle III visent principalement à :", opts: ["Libéraliser le commerce international","Renforcer les fonds propres des banques pour mieux absorber les pertes","Supprimer la supervision bancaire","Accélérer la titrisation des crédits"], ans: 1, exp: "Bâle III (2010) renforce les exigences en capital des banques : ratio CET1 ≥ 4,5 %, coussins de sécurité supplémentaires, ratio de levier maximal. Les banques doivent détenir davantage de fonds propres de qualité pour résister à une crise sans recours au contribuable." },
+      { q: "La faillite de quelle banque en septembre 2008 a déclenché la crise systémique mondiale ?", opts: ["Bear Stearns","Goldman Sachs","Lehman Brothers","Merrill Lynch"], ans: 2, exp: "La faillite de Lehman Brothers le 15 septembre 2008 est le moment de basculement de la crise des subprimes en crise financière mondiale. Contrairement à Bear Stearns (rachetée par JPMorgan), le gouvernement américain a décidé de ne pas sauver Lehman, déclenchant une panique mondiale." }
+    ]
+  },
+  {
+    id: 5,
+    title: "Quelles politiques économiques dans le cadre européen ?",
+    color: "#f0c040",
+    sections: [
+      {
+        icon: "🇪🇺",
+        title: "Les contraintes du cadre européen",
+        content: `
+          <p class="desc">L'appartenance à la zone euro et à l'Union européenne impose aux États membres des contraintes institutionnelles fortes qui limitent leur autonomie de politique économique, tout en ouvrant de nouvelles marges de manœuvre collectives.</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Zone euro et politique monétaire unique</div>
+              <div class="actor-desc">La BCE fixe un taux directeur unique pour toute la zone euro. Les 20 États membres n'ont plus de politique monétaire nationale ni de politique de change (plus de dévaluation compétitive possible). Contrainte majeure en cas de choc asymétrique : si seule la France est en récession, la BCE ne peut baisser ses taux que pour elle.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Pacte de Stabilité et de Croissance (PSC)</div>
+              <div class="actor-desc">Adopté en 1997, révisé depuis. Deux règles budgétaires : déficit public ≤ 3 % du PIB et dette ≤ 60 % du PIB. En cas de dépassement : procédure de déficit excessif (PDE) avec possibilité de sanctions. Ces règles ont été suspendues lors du Covid (2020-2021) et réformées en 2024.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent3);">
+              <div class="actor-name">Triangle d'incompatibilité de Mundell</div>
+              <div class="actor-desc">On ne peut pas avoir simultanément : libre circulation des capitaux + taux de change fixe + politique monétaire autonome. La zone euro a choisi libre circulation + politique monétaire commune → abandon de la politique monétaire nationale et du change. L'ajustement passe par les prix, les salaires et la mobilité du travail (insuffisante en Europe).</div>
+            </div>
+          </div>
+          <div class="auteur-row"><div class="auteur-name">Mundell (1961)</div><div class="auteur-desc">Zone monétaire optimale (ZMO) : une union monétaire est optimale si les pays membres sont soumis aux mêmes chocs, ont des marchés du travail flexibles et mobiles, et des mécanismes de transfert budgétaire. L'Europe satisfait imparfaitement ces critères.</div></div>`
+      },
+      {
+        icon: "🔑",
+        title: "Instruments et acteurs de la politique économique européenne",
+        content: `
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">BCE — politique monétaire</div><div class="kc-def">Objectif principal : stabilité des prix (inflation ~2 % à moyen terme, objectif symétrique depuis 2021). Instruments : taux directeurs (refi, dépôt, prêt marginal), QE, TLTRO. Indépendante des gouvernements.</div></div>
+            <div class="kc-card"><div class="kc-term">Politique budgétaire</div><div class="kc-def">Reste aux mains des États mais encadrée par le PSC. Levier fiscal (impôts, taxes) et dépenses publiques. Peut jouer sur les stabilisateurs automatiques (chômage, impôts progressifs) ou de manière discrétionnaire (plan de relance).</div></div>
+            <div class="kc-card"><div class="kc-term">Quantitative Easing (QE)</div><div class="kc-def">Rachat d'actifs (obligations souveraines, ABS) par la BCE pour injecter des liquidités, faire baisser les taux longs et relancer le crédit. Utilisé à partir de 2015 (Draghi), puis massivement en 2020 (PEPP, 1 850 Mds€). Inversé depuis 2022-2023 pour lutter contre l'inflation.</div></div>
+            <div class="kc-card"><div class="kc-term">Choc asymétrique</div><div class="kc-def">Choc économique affectant différemment les pays membres. Ex : la crise grecque (2010) vs la forte croissance allemande à la même période. Difficile à traiter avec un taux directeur unique pour toute la zone.</div></div>
+            <div class="kc-card"><div class="kc-term">Stabilisateurs automatiques</div><div class="kc-def">Mécanismes budgétaires qui s'ajustent automatiquement : en récession, les allocations chômage augmentent (dépenses+) et les impôts diminuent (recettes–) → soutien automatique à la demande sans décision politique. Puissants en Europe (État-providence).</div></div>
+            <div class="kc-card"><div class="kc-term">Union bancaire</div><div class="kc-def">Créée après la crise de 2012 : MSU (supervision par BCE), MRU (résolution des faillites), FGDE (garantie des dépôts, encore partielle). Réduit le "doom loop" (lien fatal entre dettes souveraines et bilans bancaires nationaux).</div></div>
+          </div>`
+      },
+      {
+        icon: "⚡",
+        title: "Le débat austérité vs relance",
+        content: `
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent3);">
+              <div class="actor-name">Politique d'austérité</div>
+              <div class="actor-desc">Réduire les dépenses publiques et/ou augmenter les impôts pour restaurer la confiance des marchés et respecter le PSC. Justifiée par la théorie de l'équivalence ricardienne (Barro) : anticiper une austérité future, les agents épargnent, neutralisant les relances. Critiquée car le multiplicateur budgétaire est positif en récession : une baisse des dépenses peut aggraver la récession (multiplicateur > 1 selon le FMI, 2012-2013).</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Politique de relance</div>
+              <div class="actor-desc">Dépenses publiques pour soutenir l'activité et l'emploi. Justifiée par le multiplicateur keynésien. Limitée par les règles européennes (3 % de déficit). Efficace surtout en bas de cycle (taux d'intérêt bas, multiplicateur élevé). Risque : emballement de la dette si le taux d'intérêt dépasse le taux de croissance (r > g).</div>
+            </div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">🔑</div>
+            <div class="tip-text"><strong>Point clé — NextGenerationEU (2020) :</strong> Pour la 1ère fois de son histoire, l'UE s'est endettée collectivement (750 Mds€ = 390 Mds€ de subventions + 360 Mds€ de prêts) pour financer la reprise post-Covid et la transition verte (plan REPowerEU). Rupture majeure avec la logique d'austérité. Remboursement prévu jusqu'en 2058.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« Avec une politique monétaire unique et un Pacte de stabilité qui bride les États, les pays de la zone euro ont-ils encore les outils pour faire face à un choc économique majeur ? »</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas confondre politique monétaire (BCE, taux d'intérêt, masse monétaire) et politique budgétaire (États, impôts, dépenses publiques). La première est commune et centralisée à Francfort ; la seconde reste nationale mais encadrée.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>BCE : politique monétaire unique (taux directeur, QE) pour 20 États membres</li><li>PSC : règle des 3 % et 60 % encadre les politiques budgétaires nationales</li><li>Triangle de Mundell : impossibilité de cumuler mobilité capitaux + change fixe + politique monétaire autonome</li><li>Choc asymétrique : le talon d'Achille de la zone euro (politique unique inadaptée à des situations différentes)</li><li>NextGenerationEU (2020) : rupture historique — première dette commune européenne</li></ul></div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "Quel est l'objectif principal de la BCE en matière d'inflation ?", opts: ["0% d'inflation","Inflation inférieure à 2% mais proche de 2%","Inflation entre 3% et 5%","Croissance maximale de la masse monétaire"], ans: 1, exp: "La BCE a pour mandat principal la stabilité des prix. Depuis 2021, elle vise symétriquement 2 % à moyen terme pour la zone euro." },
+      { q: "Le Pacte de Stabilité et de Croissance fixe comme règle :", opts: ["Déficit ≤ 5% et dette ≤ 100% du PIB","Déficit ≤ 3% et dette ≤ 60% du PIB","Déficit nul et dette ≤ 80% du PIB","Déficit ≤ 2% et dette ≤ 50% du PIB"], ans: 1, exp: "Le PSC (1997) impose deux règles numériques aux États membres : déficit public ≤ 3 % du PIB et dette ≤ 60 % du PIB. En cas de dépassement : procédure de déficit excessif avec sanctions potentielles." },
+      { q: "Un choc asymétrique dans la zone euro pose problème car :", opts: ["Il profite toujours aux pays du Nord","La politique monétaire unique ne peut pas s'adapter à tous les pays simultanément","Il n'existe pas de mécanisme pour y faire face","La BCE peut l'anticiper facilement"], ans: 1, exp: "Un choc asymétrique touche différemment les pays membres. Avec une politique monétaire commune, la BCE ne peut pas adapter son taux directeur à chaque situation nationale. C'est un des problèmes fondamentaux de la zone euro identifié par Mundell dès 1961." },
+      { q: "Le Quantitative Easing (QE) consiste pour la BCE à :", opts: ["Augmenter les taux d'intérêt pour freiner l'inflation","Racheter des actifs financiers pour injecter des liquidités dans l'économie","Imposer des restrictions budgétaires aux États","Supprimer les dettes des États membres"], ans: 1, exp: "Le QE (assouplissement quantitatif) est une politique monétaire non conventionnelle : la BCE rachète des titres de dette sur les marchés pour injecter des liquidités, faire baisser les taux longs et relancer le crédit. Utilisé à partir de 2015 puis massivement en 2020 (PEPP)." },
+      { q: "Le 'triangle d'incompatibilité' de Mundell affirme qu'on ne peut pas avoir simultanément :", opts: ["Croissance, inflation faible et plein emploi","Libre circulation des capitaux, taux de change fixe et politique monétaire autonome","Budget équilibré, croissance et faible chômage","BCE indépendante, PSC et politique de relance"], ans: 1, exp: "Le trilemme de Mundell montre qu'avec libre circulation des capitaux et taux fixe, la politique monétaire nationale est impossible. La zone euro a choisi libre circulation + politique monétaire commune, au détriment des politiques nationales." }
+    ]
+  },
+  {
+    id: 6,
+    title: "Comment est structurée la société française actuelle ?",
+    color: "#a78bfa",
+    sections: [
+      {
+        icon: "👥",
+        title: "Les grandes théories de la stratification sociale",
+        content: `
+          <p class="desc">La stratification sociale désigne la hiérarchisation durable des individus et groupes au sein d'une société. Plusieurs théories classiques et contemporaines en rendent compte, avec des implications politiques et analytiques différentes.</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent3);">
+              <div class="actor-name">Marx : classes sociales et antagonisme</div>
+              <div class="actor-desc">Pour Marx, les classes sont définies par leur rapport objectif aux moyens de production. Dans le capitalisme : bourgeoisie (propriétaires des moyens de production) vs prolétariat (travailleurs qui vendent leur force de travail). L'exploitation (plus-value) génère un antagonisme structurel qui conduit à la lutte des classes. Vision binaire et conflictuelle de la société.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Weber : classes, statuts, partis</div>
+              <div class="actor-desc">Weber enrichit Marx en identifiant trois ordres distincts de stratification : la classe (dimension économique — revenus), le statut (prestige social, style de vie, honneur) et les partis (dimension politique, accès au pouvoir). Vision multidimensionnelle : un individu peut avoir une position différente selon chaque dimension (ex : un artiste pauvre mais très estimé).</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Bourdieu : capitaux, champs et habitus</div>
+              <div class="actor-desc">Les positions sociales dépendent du volume et de la structure des capitaux : économique (patrimoine, revenus), culturel (diplômes, savoirs, dispositions), social (réseaux, relations) et symbolique (prestige reconnu). Ces capitaux s'exercent dans des champs (espaces sociaux de concurrence). L'habitus (dispositions incorporées par socialisation) reproduit les structures sociales.</div>
+            </div>
+          </div>
+          <div class="auteur-row"><div class="auteur-name">Marx (1867 — Le Capital)</div><div class="auteur-desc">Classes définies par le rapport aux moyens de production. Lutte des classes comme moteur de l'histoire.</div></div>
+          <div class="auteur-row"><div class="auteur-name">Weber (1921 — Économie et Société)</div><div class="auteur-desc">Trois dimensions de la stratification : classe (éco), statut (prestige), parti (politique). Rejet du déterminisme économique pur.</div></div>
+          <div class="auteur-row"><div class="auteur-name">Bourdieu (La Distinction, 1979)</div><div class="auteur-desc">Capitaux multiples, champs sociaux, habitus. La domination sociale fonctionne via la légitimation culturelle des inégalités.</div></div>`
+      },
+      {
+        icon: "🔑",
+        title: "Structure et évolution de la société française",
+        content: `
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">PCS (INSEE)</div><div class="kc-def">Professions et Catégories Socioprofessionnelles : nomenclature INSEE classant la population active. 6 grandes catégories : agriculteurs exploitants, artisans/commerçants, cadres/PI, professions intermédiaires, employés, ouvriers. Outil central des statistiques sociales.</div></div>
+            <div class="kc-card"><div class="kc-term">Moyennisation (Mendras)</div><div class="kc-def">Thèse de Henri Mendras (La Seconde Révolution française, 1988) : les Trente Glorieuses ont produit une "galaxie centrale" composée d'une vaste classe moyenne. Déclin des anciennes classes rigides au profit d'une société plus fluide centrée sur le mode de vie.</div></div>
+            <div class="kc-card"><div class="kc-term">Polarisation sociale</div><div class="kc-def">Thèse contemporaine dominante : creusement des écarts entre le haut et le bas de la hiérarchie sociale. Hausse des revenus du capital (Piketty), déclassement de la classe moyenne, montée de la précarité. Contredit Mendras sur les tendances récentes.</div></div>
+            <div class="kc-card"><div class="kc-term">Capital culturel (Bourdieu)</div><div class="kc-def">Trois formes : incorporé (dispositions durables — goûts, manières), objectivé (livres, tableaux, instruments), institutionnalisé (diplômes reconnus). Transmis par la famille et légitimé par l'école. Principal mécanisme de reproduction sociale.</div></div>
+            <div class="kc-card"><div class="kc-term">Habitus (Bourdieu)</div><div class="kc-def">Système de dispositions durables incorporées par la socialisation (primaire dans la famille, secondaire à l'école). Génère des pratiques et perceptions cohérentes avec la position sociale. Inconscient, durable et transposable à différentes situations.</div></div>
+            <div class="kc-card"><div class="kc-term">Inégalités cumulatives</div><div class="kc-def">Les inégalités économiques, sociales et culturelles se renforcent mutuellement. Un revenu élevé facilite l'accès à l'éducation (capital culturel), aux réseaux (capital social), et au prestige (capital symbolique) — et vice versa.</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">📖</div>
+            <div class="tip-text"><strong>Débat actuel :</strong> La société française est-elle moyennisée (Mendras) ou polarisée ? Les données de l'INSEE et Piketty penchent vers une polarisation croissante depuis les années 1980 : les 1 % les plus riches captent une part croissante des revenus et du patrimoine, tandis que la précarité des classes populaires s'accroît.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« La France est-elle une société de classes comme le pensait Marx, ou une vaste galaxie centrale moyennisée comme l'affirmait Mendras ? Les données récentes semblent donner raison à ceux qui voient une polarisation croissante. »</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas confondre l'habitus et le capital culturel. L'habitus est un système de dispositions (façon d'être, de penser, de percevoir) ; le capital culturel est une ressource mobilisable (diplômes, savoirs). L'habitus est le produit de l'intériorisation de la position sociale.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>Marx : classes par rapport aux moyens de production (bourgeoisie / prolétariat)</li><li>Weber : 3 dimensions (classe + statut + parti) — vision multidimensionnelle</li><li>Bourdieu : capitaux (éco, culturel, social, symbolique) + habitus + champs</li><li>Mendras (moyennisation) vs Piketty/contemporains (polarisation) — débat central</li><li>PCS : outil statistique de l'INSEE pour classer la population active</li></ul></div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "Chez Marx, les classes sociales sont définies par :", opts: ["Le niveau de revenus","Le rapport aux moyens de production","Le prestige social","Le niveau de diplôme"], ans: 1, exp: "Pour Marx, les classes sociales sont des groupes définis par leur rapport objectif aux moyens de production : la bourgeoisie (propriétaires du capital) et le prolétariat (travailleurs qui vendent leur force de travail). Cet antagonisme génère la lutte des classes." },
+      { q: "Weber complète Marx en ajoutant à la dimension économique :", opts: ["Le capital culturel et le capital social","Le statut (prestige) et les partis (pouvoir politique)","Le genre et l'origine ethnique","L'âge et la localisation géographique"], ans: 1, exp: "Weber identifie trois ordres distincts de stratification : la classe (dimension économique), le statut (prestige, style de vie, honneur) et les partis (dimension politique). Vision plus multidimensionnelle que Marx, refusant le déterminisme économique." },
+      { q: "L'habitus chez Bourdieu désigne :", opts: ["L'ensemble des diplômes obtenus","Les dispositions durables incorporées qui orientent les pratiques sociales","Le capital économique d'un individu","Le réseau de relations sociales"], ans: 1, exp: "L'habitus (Bourdieu) est un système de dispositions durables acquises par la socialisation primaire et secondaire. Il génère des pratiques et perceptions cohérentes avec la position sociale, et contribue à reproduire les structures sociales de manière souvent inconsciente." },
+      { q: "La 'moyennisation' (Mendras) désigne :", opts: ["L'appauvrissement de la classe moyenne","Le fait que la société française s'est structurée autour d'une vaste classe moyenne majoritaire","La disparition des classes sociales","La montée en puissance des inégalités"], ans: 1, exp: "Henri Mendras (La Seconde Révolution française, 1988) décrit une société française qui s'est 'moyennisée' après les Trente Glorieuses. Thèse remise en question par la polarisation contemporaine." },
+      { q: "Les PCS (Professions et Catégories Socioprofessionnelles) sont :", opts: ["Un indicateur du PIB par catégorie","L'outil de classement de la population active utilisé par l'INSEE","Une mesure des inégalités de revenus","Un indicateur du niveau de formation"], ans: 1, exp: "Les PCS sont la nomenclature de l'INSEE qui classe la population active en groupes homogènes selon la profession, le statut et la qualification. Elles servent de référence dans toutes les statistiques sociales françaises." }
+    ]
+  },
+  {
+    id: 7,
+    title: "Quelle est l'action de l'école sur les destins individuels et la société ?",
+    color: "#f0c040",
+    sections: [
+      {
+        icon: "🏫",
+        title: "Les fonctions de l'école",
+        content: `
+          <p class="desc">L'école joue plusieurs fonctions dans la société contemporaine qui peuvent être complémentaires ou en tension. Durkheim voit dans l'école un agent de socialisation ; Becker y voit un lieu d'accumulation de capital humain ; Bourdieu en fait un lieu de reproduction sociale.</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Socialisation (Durkheim)</div>
+              <div class="actor-desc">L'école transmet les valeurs, normes et la culture commune indispensables à la cohésion sociale. Elle forge le "citoyen" et assure la continuité de la société. Durkheim voit l'école comme le prolongement de la famille dans la société (Éducation et Sociologie, 1922). Fonction intégratrice : l'école républicaine crée un sentiment d'appartenance commune.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Qualification et capital humain (Becker)</div>
+              <div class="actor-desc">L'école forme les compétences nécessaires au marché du travail. Gary Becker (Capital humain, 1964) voit la scolarisation comme un investissement rationnel : les individus et la société "investissent" dans l'éducation pour en tirer des rendements futurs (salaires plus élevés, croissance économique). Lien avec les théories de croissance endogène.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Sélection et allocation sociale</div>
+              <div class="actor-desc">L'école classe les individus selon leurs résultats scolaires et leur attribue une place dans la hiérarchie sociale via les diplômes. Idéal méritocratique : les positions sociales sont ouvertes à tous selon le mérite. Réalité : les résultats sont très corrélés à l'origine sociale (Bourdieu).</div>
+            </div>
+          </div>`
+      },
+      {
+        icon: "🔑",
+        title: "L'école : méritocratie ou reproduction des inégalités ?",
+        content: `
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">Méritocratie scolaire</div><div class="kc-def">Idéal : la réussite scolaire dépend uniquement du mérite individuel (travail, talents). La société se légitime par un concours équitable. Valeur fondatrice de l'école républicaine française. Contesté par les données sociologiques.</div></div>
+            <div class="kc-card"><div class="kc-term">Reproduction sociale (Bourdieu &amp; Passeron)</div><div class="kc-def">Dans La Reproduction (1970) : l'école reproduit les inégalités en valorisant le capital culturel des classes dominantes (maîtrise de la langue, références culturelles). Ce capital est traité comme un mérite "naturel". L'école légitime les inégalités sociales en les convertissant en inégalités scolaires.</div></div>
+            <div class="kc-card"><div class="kc-term">Violence symbolique</div><div class="kc-def">Bourdieu : imposition de la culture dominante (celle des classes supérieures) comme culture légitime et universelle. Les dominés (classes populaires) intériorisent leur propre infériorité culturelle, croyant que leur échec est mérité. Invisible car non perçue comme violence.</div></div>
+            <div class="kc-card"><div class="kc-term">Déclassement scolaire</div><div class="kc-def">Obtenir un statut professionnel inférieur à ce que le niveau de diplôme laissait espérer. Lié à l'inflation scolaire : quand le niveau moyen de diplôme augmente, les diplômes d'autrefois suffisants ne le sont plus. Génération "bac + frustrés".</div></div>
+            <div class="kc-card"><div class="kc-term">Effet d'établissement</div><div class="kc-def">L'école (et la classe) fréquentée influence les résultats scolaires au-delà des caractéristiques individuelles des élèves. Ségrégation scolaire : regroupement des élèves défavorisés dans certains établissements amplifie les inégalités.</div></div>
+            <div class="kc-card"><div class="kc-term">Capital scolaire (signal)</div><div class="kc-def">Le diplôme envoie un signal aux employeurs (Arrow, Spence) : il certifie des compétences et permet le tri sur le marché du travail. L'inflation scolaire (tous plus diplômés) peut dévaloriser ce signal.</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">⚖️</div>
+            <div class="tip-text"><strong>Tension centrale :</strong> L'école républicaine promeut l'égalité des chances et la méritocratie. Mais Bourdieu montre qu'elle reproduit les inégalités en traitant comme "naturelles" des inégalités culturelles construites socialement. Les données de l'OCDE confirment que la France est l'un des pays où l'origine sociale pèse le plus sur les résultats scolaires (PISA 2022).</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« L'école de la République promet à chacun que son destin ne dépend que de son mérite. Mais Bourdieu montre que c'est la position de départ, et non le mérite seul, qui détermine en grande partie la trajectoire scolaire. »</div>
+            <div class="bac-box bac-exemple"><div class="bac-label">📌 Exemple mobilisable</div>Selon l'enquête PISA 2022 (OCDE), la France est l'un des pays où l'écart de performance scolaire entre élèves favorisés et défavorisés est le plus élevé des pays développés — malgré un système éducatif public universel.</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas confondre reproduction sociale (mécanisme de Bourdieu) et déterminisme absolu. Bourdieu ne dit pas que la mobilité scolaire est impossible, mais que l'école favorise structurellement les classes dominantes via le capital culturel.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>Durkheim : école = socialisation et cohésion sociale / Becker : école = capital humain / Bourdieu : école = reproduction sociale</li><li>Bourdieu &amp; Passeron (La Reproduction, 1970) : l'école valorise le capital culturel dominant</li><li>Violence symbolique : les dominés intériorisent leur infériorité comme méritée</li><li>Méritocratie : idéal contesté par les données (origine sociale détermine fortement la réussite)</li><li>Déclassement : inflation scolaire → diplômes dévalorisés relativement</li></ul></div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "La 'reproduction sociale' chez Bourdieu et Passeron signifie :", opts: ["L'école réduit efficacement les inégalités sociales","L'école reproduit les inégalités en valorisant la culture des classes dominantes","L'école forme des citoyens identiques","Les enfants reproduisent les métiers de leurs parents par choix"], ans: 1, exp: "Dans La Reproduction (1970), Bourdieu et Passeron montrent que l'école, malgré son apparente neutralité, reproduit les inégalités sociales en valorisant le capital culturel des classes dominantes et en traitant cet avantage comme du mérite naturel." },
+      { q: "La méritocratie scolaire repose sur l'idée que :", opts: ["Le diplôme dépend uniquement de l'origine sociale","La réussite scolaire résulte du mérite individuel (travail, talents) indépendamment de l'origine","Les grandes écoles sont accessibles à tous sur concours","Le déterminisme social est inévitable"], ans: 1, exp: "La méritocratie est l'idéal selon lequel la position sociale doit être déterminée par les compétences et le travail, non par l'héritage. Cet idéal est contesté par les données sociologiques qui montrent la forte corrélation entre origine sociale et réussite." },
+      { q: "La 'violence symbolique' désigne chez Bourdieu :", opts: ["Les violences physiques dans les établissements scolaires","L'imposition de la culture dominante comme légitime et universelle, intériorisée par les dominés","Les sanctions disciplinaires injustes","La sélection des élèves par les concours"], ans: 1, exp: "La violence symbolique est une forme de domination exercée avec la complicité inconsciente des dominés : la culture des classes dominantes est présentée comme la culture légitime, et les autres intériorisent leur infériorité culturelle sans la questionner." },
+      { q: "Le déclassement scolaire correspond à :", opts: ["Un niveau de diplôme inférieur à celui des parents","Obtenir un emploi de niveau inférieur à ce que le diplôme laissait espérer","Un manque de motivation scolaire","La suppression de filières prestigieuses"], ans: 1, exp: "Le déclassement désigne la situation où un diplômé occupe un emploi dont le niveau est inférieur à ce que son diplôme permettait d'attendre. Lié à l'inflation des diplômes : quand tout le monde est plus diplômé, la valeur relative des titres baisse." },
+      { q: "Durkheim voit l'école principalement comme :", opts: ["Un outil de reproduction des inégalités","Un agent de socialisation transmettant les valeurs communes de la société","Un marché de l'emploi","Un système de tri entre bons et mauvais élèves"], ans: 1, exp: "Pour Durkheim (Éducation et Sociologie, 1922), l'école est avant tout un agent de socialisation : elle transmet les valeurs, normes et la culture commune indispensables à la cohésion sociale. Elle fabrique le 'citoyen' et assure la continuité de la société." }
+    ]
+  },
+  {
+    id: 8,
+    title: "Quelles sont les caractéristiques contemporaines et les facteurs de mobilité sociale ?",
+    color: "#5de8a0",
+    sections: [
+      {
+        icon: "📈",
+        title: "Les types et mesures de la mobilité sociale",
+        content: `
+          <p class="desc">La mobilité sociale désigne le mouvement des individus dans la hiérarchie sociale. Son étude statistique permet de mesurer à quel point les sociétés tiennent leurs promesses méritocratiques.</p>
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">Mobilité sociale</div><div class="kc-def">Changement de position dans la hiérarchie sociale. Intergénérationnelle : entre parents et enfants (usage dominant). Intragénérationnelle : au cours d'une même carrière.</div></div>
+            <div class="kc-card"><div class="kc-term">Mobilité ascendante / descendante</div><div class="kc-def">Ascendante : monter dans la hiérarchie (fils d'ouvrier devenant cadre). Descendante : descendre (cadre licencié devenant employé). Le déclassement contemporain concerne de nombreux jeunes diplômés.</div></div>
+            <div class="kc-card"><div class="kc-term">Table de mobilité (matrice)</div><div class="kc-def">Tableau statistique à double entrée : PCS du fils (lignes) × PCS du père (colonnes). Lit les flux de mobilité. Sur la diagonale = immobilité (reproduction). Hors diagonale = mobilité (ascendante ou descendante).</div></div>
+            <div class="kc-card"><div class="kc-term">Mobilité absolue vs relative (fluidité)</div><div class="kc-def">Absolue : part totale de personnes ayant changé de PCS. Dépend de la structure des emplois. Relative (fluidité) : indépendance entre origine et destination — mesure la vraie égalité des chances, indépendamment des transformations structurelles.</div></div>
+            <div class="kc-card"><div class="kc-term">Mobilité structurelle vs nette</div><div class="kc-def">Structurelle : mobilité due à la transformation de la structure des emplois (tertiarisation → plus de cadres). Nette : mobilité au-delà des seuls effets de structure = vraie fluidité sociale. En France, la fluidité nette a peu progressé.</div></div>
+            <div class="kc-card"><div class="kc-term">Déclassement</div><div class="kc-def">Descendre par rapport à son niveau de diplôme ou par rapport à ses parents malgré une hausse du niveau d'études. Phénomène en hausse en France depuis les années 1980, amplifié par l'inflation scolaire.</div></div>
+          </div>`
+      },
+      {
+        icon: "⚙️",
+        title: "Les facteurs de mobilité sociale",
+        content: `
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Facteurs structurels (transformation des emplois)</div>
+              <div class="actor-desc">La tertiarisation (passage à une économie de services) et la hausse des emplois qualifiés créent mécaniquement de la mobilité ascendante structurelle : si les postes de cadres augmentent, des fils d'ouvriers en occupent certains — non pas grâce à plus de fluidité, mais parce que la structure des emplois a changé.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">École et diplôme</div>
+              <div class="actor-desc">L'accès aux diplômes est le principal vecteur individuel de mobilité ascendante. Mais la reproduction scolaire (Bourdieu) en limite la portée : les enfants de milieux favorisés réussissent mieux à l'école et accèdent aux filières d'élite (grandes écoles). L'effet de l'école sur la mobilité réelle est donc ambigu.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent3);">
+              <div class="actor-name">Capital social (Bourdieu, Putnam)</div>
+              <div class="actor-desc">Le réseau de relations (famille, amis, anciens élèves) facilite l'accès à l'emploi et la mobilité. Source d'inégalités : les individus dotés d'un fort capital social (Grandes Écoles, milieux aisés) ont accès à des opportunités inaccessibles aux autres.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Conjoncture économique</div>
+              <div class="actor-desc">En période de croissance, la mobilité ascendante est plus forte (plus d'emplois à pourvoir). La crise fragilise les positions acquises (déclassement, précarisation). Le contexte macroéconomique conditionne fortement les trajectoires individuelles.</div>
+            </div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">📊</div>
+            <div class="tip-text"><strong>Distinction clé pour le bac :</strong> Mobilité absolue ≠ fluidité (mobilité relative nette). La France a connu beaucoup de mobilité absolue (tertiarisation → plus de cadres) mais peu de fluidité : les chances d'ascension sociale restent très liées à l'origine sociale. Les travaux de Louis Chauvel montrent que les générations nées après 1970 connaissent moins de mobilité ascendante que leurs parents.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« En France, plus de la moitié des fils de cadres deviennent cadres — et plus de la moitié des fils d'ouvriers restent ouvriers ou employés. La promesse méritocratique de l'école républicaine est-elle tenue ? »</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Confondre mobilité absolue et fluidité sociale. Une hausse de la mobilité absolue (plus de cadres) peut masquer une absence de progrès de la fluidité (les chances relatives sont stables). Ce sont deux mesures très différentes.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>Table de mobilité : outil statistique clé — diagonale = immobilité, hors-diagonale = mobilité</li><li>Mobilité absolue ≠ fluidité (nette/relative) — distinction fondamentale</li><li>3 facteurs principaux : structure des emplois, école/diplôme, capital social</li><li>La France : beaucoup de mobilité structurelle, peu de progrès de la fluidité réelle</li><li>Déclassement : phénomène en hausse lié à l'inflation scolaire</li></ul></div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "La mobilité intergénérationnelle mesure :", opts: ["Les changements de position au sein d'une même carrière","La différence de position sociale entre parents et enfants","Le taux de chômage selon la génération","Les inégalités de salaires entre jeunes et vieux"], ans: 1, exp: "La mobilité intergénérationnelle compare la position sociale d'un individu à celle de ses parents. Elle répond à la question : la société offre-t-elle des chances d'ascension sociale indépendantes de l'origine ?" },
+      { q: "La mobilité 'structurelle' est due à :", opts: ["La volonté individuelle des acteurs","La modification de la structure des emplois (ex : croissance des professions intellectuelles supérieures)","La politique de redistribution de l'État","L'égalisation des revenus"], ans: 1, exp: "La mobilité structurelle résulte de transformations de la structure des emplois : si les emplois de cadres augmentent et ceux d'ouvriers diminuent, des fils d'ouvriers deviennent cadres mécaniquement. C'est une mobilité due à la structure économique, pas à la fluidité sociale." },
+      { q: "La fluidité sociale désigne :", opts: ["La vitesse à laquelle les individus changent d'emploi","L'indépendance entre la position sociale d'origine et de destination (mobilité nette)","L'absence totale de classes sociales","La mobilité géographique des travailleurs"], ans: 1, exp: "La fluidité sociale (mobilité relative ou nette) mesure si les chances de mobilité sont indépendantes de l'origine sociale — une fois contrôlés les effets de structure. C'est la vraie mesure d'égalité des chances. En France, la fluidité sociale a peu progressé depuis les années 1970." },
+      { q: "Une table de mobilité est :", opts: ["Un tableau statistique comparant revenus et diplômes","Un tableau croisant la PCS du fils et celle du père pour mesurer les flux de mobilité","Un indicateur du niveau de vie des ménages","Un classement des écoles selon leur taux de mobilité"], ans: 1, exp: "Une table de mobilité est un tableau à double entrée croisant la catégorie socioprofessionnelle des fils (en ligne) avec celle de leur père (en colonne). Les éléments sur la diagonale indiquent la reproduction sociale (même PCS), hors diagonale la mobilité." },
+      { q: "Le déclassement contemporain est principalement lié à :", opts: ["La baisse du niveau d'éducation","L'inflation des diplômes : la hausse généralisée du niveau de diplôme réduit leur valeur relative","Le refus de travailler des jeunes générations","La mondialisation uniquement"], ans: 1, exp: "Le déclassement est alimenté par l'inflation scolaire : quand le niveau de diplôme moyen augmente, les diplômes d'autrefois suffisants pour un poste ne le sont plus. La concurrence s'intensifie et certains diplômés se retrouvent à un niveau inférieur à leurs attentes." }
+    ]
+  },
+  {
+    id: 9,
+    title: "Quelles mutations du travail et de l'emploi ?",
+    color: "#4fa3f7",
+    sections: [
+      {
+        icon: "🔄",
+        title: "Les grandes transformations du travail",
+        content: `
+          <p class="desc">Le travail et l'emploi ont connu des transformations profondes depuis les années 1970 sous l'effet conjugué de la tertiarisation, de la mondialisation, des révolutions technologiques et de la montée de la flexibilité.</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Tertiarisation</div>
+              <div class="actor-desc">Passage d'une économie industrielle à une économie dominée par les services : plus de 77 % des emplois en France se trouvent dans le secteur tertiaire (2024). Ce mouvement génère de la mobilité ascendante structurelle (plus de cadres) mais aussi de la précarisation (services à bas salaires).</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Flexibilité du travail</div>
+              <div class="actor-desc">Flexibilité quantitative externe : ajustement des effectifs (CDD, intérim, temps partiel). Quantitative interne : modulation du temps de travail (annualisation). Qualitative : polyvalence, mobilité fonctionnelle. Répond aux exigences de compétitivité des entreprises, mais fragilise les travailleurs (précarisation des trajectoires).</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent3);">
+              <div class="actor-name">Numérisation, automatisation et IA</div>
+              <div class="actor-desc">Frey &amp; Osborne (2013) estiment que 47 % des emplois américains sont exposés à l'automatisation. Les tâches routinières (comptabilité, fabrication standard) sont les plus menacées. Mais l'histoire montre que chaque vague technologique crée aussi de nouveaux emplois (effet Schumpeter). L'IA générative (2023-) représente une nouvelle rupture.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Travail non salarié et ubérisation</div>
+              <div class="actor-desc">Montée de l'auto-entrepreneuriat (2 millions d'auto-entrepreneurs en France en 2023) et des travailleurs de plateformes (Uber, Deliveroo, Upwork). Statut ambigu : formellement indépendants, économiquement très dépendants. Débat juridique sur la requalification en contrat de travail (arrêt Cour de cassation, 2020).</div>
+            </div>
+          </div>`
+      },
+      {
+        icon: "🔑",
+        title: "Les grands modèles d'organisation du travail",
+        content: `
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">Taylorisme</div><div class="kc-def">Organisation scientifique du travail (Taylor, 1911) : décomposition des tâches en gestes élémentaires, chronométrage, spécialisation poussée, séparation conception/exécution. Maximise la productivité mais aliène les travailleurs.</div></div>
+            <div class="kc-card"><div class="kc-term">Fordisme</div><div class="kc-def">Combine le taylorisme avec la chaîne de montage, des salaires élevés (5 $/jour, Ford 1914) pour permettre la consommation de masse et une standardisation des produits. Modèle dominant des Trente Glorieuses. Crise du fordisme dans les années 1970 (saturation de la demande, hausse des coûts).</div></div>
+            <div class="kc-card"><div class="kc-term">Toyotisme (lean production)</div><div class="kc-def">Production en flux tendus (juste-à-temps), zéro stock, qualité totale (zéro défaut), polyvalence des équipes, amélioration continue (kaizen). Réponse flexible aux variations de la demande. Modèle Toyota généralisé à partir des années 1980.</div></div>
+            <div class="kc-card"><div class="kc-term">Précarisation de l'emploi</div><div class="kc-def">Développement des formes d'emploi instables : CDD, intérim, temps partiel subi. En France, 87 % des embauches se font en CDD (INSEE, 2023), même si la majorité des emplois reste en CDI. Fragilise les trajectoires professionnelles et la protection sociale.</div></div>
+            <div class="kc-card"><div class="kc-term">Polarisation des emplois</div><div class="kc-def">Croissance simultanée des emplois très qualifiés (cadres, ingénieurs) ET peu qualifiés (aide à la personne, livraison), au détriment des emplois intermédiaires (ouvriers qualifiés, employés de bureau). Phénomène documenté en France et dans la plupart des pays développés.</div></div>
+            <div class="kc-card"><div class="kc-term">Employabilité</div><div class="kc-def">Capacité d'un individu à trouver, conserver et progresser dans un emploi. Notion centrale dans un marché du travail flexible où la responsabilité de l'adaptation passe de l'entreprise à l'individu (formation continue, reconversion).</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">🤖</div>
+            <div class="tip-text"><strong>Débat :</strong> L'automatisation détruit-elle l'emploi ? Le paradoxe de la productivité (Solow, 1987 : "vous voyez des ordinateurs partout sauf dans les statistiques de productivité") suggère que les effets sont lents. Mais l'IA générative (GPT-4, 2023) pourrait changer l'échelle et la vitesse des transformations.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« De la chaîne de montage fordiste à la livraison à vélo pour une plateforme numérique : en un siècle, le travail a été profondément reconfiguré, non sans de nouvelles formes d'insécurité. »</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas confondre travail et emploi. Le travail est une activité humaine de production de biens ou services ; l'emploi est la relation contractuelle (salariat). Il existe du travail sans emploi (bénévolat, travail domestique) et des emplois précaires qui ne sécurisent pas.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>Fordisme (chaîne + salaires élevés) → Toyotisme (flux tendus + flexibilité) = rupture des années 1970-80</li><li>Tertiarisation : + 77 % des emplois en France dans les services</li><li>Précarisation : 87 % des embauches en CDD — mais 88 % des emplois restent des CDI</li><li>Polarisation : hausse des emplois très qualifiés ET peu qualifiés, déclin du milieu</li><li>Ubérisation : nouvelle forme de travail entre salariat et indépendance — débat juridique en cours</li></ul></div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "Le fordisme est un modèle d'organisation du travail basé sur :", opts: ["La polyvalence et le juste-à-temps","La chaîne de montage, la spécialisation des tâches et des salaires élevés","Le travail à domicile et les plateformes numériques","La sous-traitance internationale"], ans: 1, exp: "Le fordisme (Ford, début XXe) combine le travail à la chaîne (taylorisme), la spécialisation des tâches et des salaires élevés (5 $/jour, 1914) permettant aux ouvriers de consommer les produits qu'ils fabriquent. Modèle dominant des Trente Glorieuses, en crise depuis les années 1970." },
+      { q: "La polarisation des emplois désigne :", opts: ["La concentration des emplois dans les grandes villes","La croissance simultanée des emplois très qualifiés et très peu qualifiés, au détriment des emplois intermédiaires","La domination du secteur tertiaire","La disparition des emplois industriels"], ans: 1, exp: "La polarisation des emplois est une transformation structurelle du marché du travail : les emplois se développent aux deux extrémités (hauts cadres et emplois de services peu qualifiés) tandis que les emplois intermédiaires déclinent." },
+      { q: "L'ubérisation du travail correspond à :", opts: ["La délocalisation des emplois vers les pays à bas salaires","Le développement du travail via des plateformes numériques au statut ambigu (entre salarié et indépendant)","La mécanisation des usines","La réduction du temps de travail"], ans: 1, exp: "L'ubérisation décrit le développement de plateformes numériques (Uber, Deliveroo, etc.) mettant en relation des prestataires et des clients. Les travailleurs ont un statut ambigu : formellement indépendants mais économiquement très dépendants de la plateforme." },
+      { q: "Le toyotisme se distingue du fordisme par :", opts: ["Des salaires plus élevés","La production en flux tendus/juste-à-temps et la polyvalence des travailleurs","La chaîne de montage plus rapide","La nationalisation des industries"], ans: 1, exp: "Le toyotisme (Toyota, Japon, années 1970-80) révolutionne l'organisation productive : juste-à-temps (zéro stock), qualité totale (zéro défaut), polyvalence des travailleurs, organisation en équipes. Répond aux exigences de flexibilité face aux variations de la demande." },
+      { q: "La précarisation de l'emploi se caractérise par :", opts: ["Une hausse généralisée des CDI","Un développement des formes instables d'emploi (CDD, intérim, temps partiel subi)","Une réduction du temps de travail","Une hausse du taux d'activité"], ans: 1, exp: "La précarisation désigne la multiplication des emplois instables et atypiques : CDD, intérim, temps partiel subi, auto-entreprise de nécessité. Ces formes d'emploi fragilisent les revenus, les droits sociaux et les parcours professionnels. En France, 87 % des embauches se font en CDD (INSEE, 2023)." }
+    ]
+  },
+  {
+    id: 10,
+    title: "Comment expliquer l'engagement politique dans les sociétés démocratiques ?",
+    color: "#e05e6d",
+    sections: [
+      {
+        icon: "🗳️",
+        title: "Les formes de participation politique",
+        content: `
+          <p class="desc">La participation politique désigne l'ensemble des activités par lesquelles les citoyens s'impliquent dans la vie politique. Elle prend des formes institutionnelles (vote) et non institutionnelles (manifestations), et connaît des transformations profondes depuis les années 1980.</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Participation conventionnelle</div>
+              <div class="actor-desc">Formes institutionnalisées et légitimées par le système politique : vote aux élections, adhésion à un parti ou syndicat, contact avec des élus, financement de campagne. En déclin relatif (abstention en hausse, désyndicats). Reste la forme la plus répandue dans les catégories socialement favorisées.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Participation non conventionnelle</div>
+              <div class="actor-desc">Formes d'action situées en dehors des voies institutionnelles : manifestations, grèves, pétitions, boycott, sit-in, occupations (ex : Gilets Jaunes 2018-2019, mouvement lycéen). En hausse relative. Répertoire d'action collective (Tilly) en expansion — notamment chez les plus jeunes et les moins diplômés.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Participation en ligne</div>
+              <div class="actor-desc">Pétitions en ligne (Change.org : des millions de signatures), mobilisations via les réseaux sociaux (Twitter/X, TikTok, Instagram), hacktivisme. Nouvelles formes d'engagement, surtout chez les jeunes. Permettent une mobilisation rapide et transnationale (MeToo, Black Lives Matter, Youth for Climate). Mais risque de "slacktivisme" (engagement superficiel).</div>
+            </div>
+          </div>
+          <div class="auteur-row"><div class="auteur-name">Charles Tilly — Répertoire d'action collective</div><div class="auteur-desc">L'ensemble des modes d'action connus et légitimes disponibles pour un groupe à une époque. Évolue historiquement : des émeutes du XVIIIe au sit-in du XXe, en passant par la manifestation encadrée du XIXe. Chaque époque a son répertoire.</div></div>
+          <div class="auteur-row"><div class="auteur-name">Russell Dalton — Citoyen engagé vs citoyen délié</div><div class="auteur-desc">Distingue le citoyen "délié" (engagement civique traditionnel, vote) du citoyen "engagé" (participation directe, enjeux postmatérialistes). La modernité produit plus de citoyens engagés et moins de citoyens déliés.</div></div>`
+      },
+      {
+        icon: "🔑",
+        title: "Facteurs et transformations de l'engagement politique",
+        content: `
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">Abstention électorale</div><div class="kc-def">Non-participation au vote. En forte hausse en France : taux d'abstention au 1er tour des législatives 2022 = 52,5 %. Peut être apathique (désintérêt) ou contestataire (rejet du système politique). Corrélée à l'âge (jeunes plus abstentionnistes), au revenu et à l'origine sociale.</div></div>
+            <div class="kc-card"><div class="kc-term">Désenchantement politique</div><div class="kc-def">Perte de confiance dans les institutions et représentants politiques. Baromètre CEVIPOF (2024) : seulement 24 % des Français font confiance aux partis politiques. Lié à la crise de représentation, aux scandales, et à la distance perçue entre élus et citoyens.</div></div>
+            <div class="kc-card"><div class="kc-term">Capital politique (Bourdieu)</div><div class="kc-def">Ressources (temps, argent, culture politique, maîtrise du discours) nécessaires pour participer efficacement à la politique. Inégalement distribué : les classes supérieures sont surreprésentées dans les formes conventionnelles de participation.</div></div>
+            <div class="kc-card"><div class="kc-term">Répertoire d'action collective (Tilly)</div><div class="kc-def">Ensemble des formes d'action disponibles et légitimes pour un groupe à une époque. Évolue historiquement. Tendance contemporaine : élargissement vers des formes plus ponctuelles, moins institutionnalisées.</div></div>
+            <div class="kc-card"><div class="kc-term">Individualisation du militantisme</div><div class="kc-def">Passage du militantisme idéologique et collectif (partis de masse, syndicats) vers des engagements plus sélectifs, ponctuels et fondés sur des valeurs personnelles. Les individus "picochent" dans plusieurs causes sans s'affilier durablement.</div></div>
+            <div class="kc-card"><div class="kc-term">Vote protestataire</div><div class="kc-def">Vote pour des partis extrêmes ou alternatifs exprimant un rejet de l'offre politique dominante. En France, le vote RN et LFI reflète en partie cette logique protestataire.</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">📊</div>
+            <div class="tip-text"><strong>Paradoxe de la participation :</strong> Alors que l'abstention et la défiance politique augmentent, de nouvelles formes d'engagement (associations, ONG, militantisme en ligne, mouvements sociaux) se multiplient. Il y a une <strong>transformation</strong> de la participation, pas une disparition. Les théoriciens parlent de "crise de la démocratie représentative" mais d'essor de la démocratie participative.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« Avec 52 % d'abstention aux législatives 2022, la démocratie française semble en panne. Mais ce même mouvement qui boude les urnes se mobilise dans la rue, sur les réseaux et dans les associations. »</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas réduire l'abstention à de l'apathie ou du désintérêt. L'abstention peut être un acte délibéré de protestation ou une conséquence de l'exclusion sociale. Distinguer abstention-résignation et abstention-contestation.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>Participation conventionnelle (vote, partis) en déclin vs non conventionnelle (manif, pétitions) en hausse</li><li>Tilly : répertoire d'action collective — évolue selon les époques et les groupes</li><li>Abstention en hausse (52 % aux législatives 2022) : apathique ou contestataire</li><li>Désenchantement politique : crise de confiance envers les institutions</li><li>Individualisation du militantisme : engagement plus ponctuel, moins idéologique, plus ciblé</li></ul></div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "La participation politique 'non conventionnelle' inclut :", opts: ["Le vote aux élections municipales","L'adhésion à un parti politique","Les manifestations, boycotts et pétitions","Le financement d'une campagne électorale"], ans: 2, exp: "La participation non conventionnelle regroupe toutes les formes d'action politique situées en dehors des voies institutionnelles : manifestations, grèves, occupations, boycotts, pétitions, sit-in, hacktivisme. Ce répertoire est en expansion, notamment chez les jeunes et les classes populaires." },
+      { q: "L'abstention électorale peut être interprétée comme :", opts: ["Un manque total d'intérêt politique","Une forme de désobéissance civile uniquement","À la fois une indifférence politique et un acte de contestation contre le système","Un signe de stabilité démocratique"], ans: 2, exp: "L'abstention est plurielle : elle peut être une apathie (désintérêt politique) mais aussi un acte délibéré de protestation contre l'offre politique. On distingue l'abstention-résignation (exclusion sociale) de l'abstention-contestation (rejet actif du système)." },
+      { q: "Le 'répertoire d'action collective' (Tilly) désigne :", opts: ["La liste des partis politiques légaux","L'ensemble des formes d'action disponibles et légitimes pour un groupe à une époque donnée","Les droits politiques garantis par la Constitution","Les stratégies électorales des partis"], ans: 1, exp: "Charles Tilly définit le répertoire d'action collective comme l'ensemble des moyens d'action connus et légitimes qu'un groupe peut utiliser pour défendre ses intérêts. Ce répertoire évolue historiquement." },
+      { q: "L'individualisation du militantisme se traduit par :", opts: ["Une hausse des adhésions aux grands partis politiques","Un glissement vers des engagements plus ponctuels, pragmatiques et distants des grandes idéologies","Une augmentation du vote obligatoire","La disparition de toute forme d'engagement"], ans: 1, exp: "L'individualisation du militantisme désigne la transformation des formes d'engagement : passage du militantisme idéologique et collectif vers des engagements plus sélectifs, ponctuels et fondés sur des valeurs personnelles." },
+      { q: "Le désenchantement politique correspond à :", opts: ["Une forte hausse de la participation électorale","Une perte de confiance dans les institutions et les représentants politiques","Une radicalisation des opinions politiques","L'émergence de nouveaux partis politiques"], ans: 1, exp: "Le désenchantement politique désigne l'affaiblissement de la confiance des citoyens dans les institutions démocratiques. En 2024, seulement 24 % des Français font confiance aux partis politiques (Baromètre CEVIPOF)." }
+    ]
+  },
+  {
+    id: 11,
+    title: "Quelles sont les inégalités compatibles avec les différentes conceptions de la justice sociale ?",
+    color: "#a78bfa",
+    sections: [
+      {
+        icon: "⚖️",
+        title: "Les conceptions de la justice sociale",
+        content: `
+          <p class="desc">La justice sociale désigne les principes qui permettent de juger une distribution des ressources, des droits et des positions comme juste ou injuste. Il n'existe pas de réponse unique : plusieurs philosophies politiques s'affrontent sur ce point.</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent);">
+              <div class="actor-name">Égalité des droits (formelle)</div>
+              <div class="actor-desc">Tous les individus ont les mêmes droits devant la loi : même droit de vote, même droit de travailler, même accès aux institutions. Fondement des démocraties libérales (Déclaration de 1789). Nécessaire mais insuffisante : une égalité formelle ne garantit pas une égalité réelle.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Égalité des chances (méritocratie)</div>
+              <div class="actor-desc">Les positions sociales doivent être ouvertes à tous selon le mérite (compétences, travail), quelle que soit l'origine sociale, le sexe, l'ethnie. Accepte les inégalités de résultats si la compétition est équitable au départ. Valeur fondatrice de l'école républicaine. Limitée par l'inégale distribution du capital culturel (Bourdieu).</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent3);">
+              <div class="actor-name">Égalité des situations (résultats)</div>
+              <div class="actor-desc">Réduire les écarts effectifs de revenus, de patrimoine et de conditions de vie. Vision redistributive : l'État doit corriger les inégalités produites par le marché et l'héritage. Peut entrer en tension avec la liberté individuelle et l'incitation au travail.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Rawls : principe de différence</div>
+              <div class="actor-desc">Dans Théorie de la justice (1971), Rawls propose un raisonnement original : derrière un "voile d'ignorance" (on ne sait pas quelle place on va occuper), des individus rationnels choisiraient deux principes : 1) liberté égale pour tous ; 2) les inégalités économiques ne sont acceptables que si elles profitent aux membres les plus défavorisés (maximin). Ce n'est pas l'égalité parfaite, mais l'inégalité au service des plus pauvres.</div>
+            </div>
+          </div>
+          <div class="auteur-row"><div class="auteur-name">Rawls (Théorie de la justice, 1971)</div><div class="auteur-desc">Voile d'ignorance + principe de différence : les inégalités sont justes si elles profitent aux plus défavorisés. Position libérale-égalitarienne.</div></div>
+          <div class="auteur-row"><div class="auteur-name">Nozick (Anarchie, État et Utopie, 1974)</div><div class="auteur-desc">Vision libertarienne : les inégalités issues d'échanges libres sont légitimes. La redistribution forcée viole les droits naturels de propriété. Seul l'État minimal est justifié.</div></div>
+          <div class="auteur-row"><div class="auteur-name">Sen (Repenser l'inégalité, 1992)</div><div class="auteur-desc">Approche par les capabilités : la justice ne doit pas porter sur les ressources mais sur les libertés réelles de faire et d'être. Les personnes handicapées ont besoin de plus de ressources pour atteindre la même liberté réelle.</div></div>`
+      },
+      {
+        icon: "🔑",
+        title: "Concepts clés et instruments de la justice sociale",
+        content: `
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">Discrimination positive</div><div class="kc-def">Mesures préférentielles en faveur de groupes structurellement défavorisés pour compenser des inégalités de départ. Ex : Zones d'Éducation Prioritaires (ZEP/REP+), quotas de genre dans les conseils d'administration (loi Copé-Zimmermann, 2011). Logique d'équité plutôt qu'égalité.</div></div>
+            <div class="kc-card"><div class="kc-term">Redistribution</div><div class="kc-def">Transfert de ressources des plus riches vers les plus pauvres via l'impôt progressif et les prestations sociales (RSA, allocations familiales, allocations logement). En France, la redistribution réduit le coefficient de Gini des revenus primaires (~0,48) à ~0,29 pour les revenus disponibles (INSEE).</div></div>
+            <div class="kc-card"><div class="kc-term">Coefficient de Gini</div><div class="kc-def">Mesure statistique de l'inégalité des revenus ou du patrimoine. Varie de 0 (égalité parfaite) à 1 (inégalité maximale). En France : Gini des revenus disponibles ≈ 0,29 (2022, INSEE). Gini des patrimoines ≈ 0,65 — les inégalités de patrimoine sont bien plus fortes que celles de revenus.</div></div>
+            <div class="kc-card"><div class="kc-term">Équité</div><div class="kc-def">Traiter différemment des situations différentes pour aboutir à un résultat juste. S'oppose à la simple égalité formelle. Ex : donner plus de moyens aux élèves défavorisés (ZEP) pour obtenir une égalité des résultats scolaires. Fondement de la discrimination positive.</div></div>
+            <div class="kc-card"><div class="kc-term">Principe de différence (Rawls)</div><div class="kc-def">Les inégalités économiques et sociales sont justifiées seulement si elles profitent aux membres les plus défavorisés. Maximin : on maximise la situation du minimum. Permet de justifier des écarts de revenus qui motivent l'innovation, si cela bénéficie aussi aux plus pauvres.</div></div>
+            <div class="kc-card"><div class="kc-term">Capabilités (Sen)</div><div class="kc-def">Libertés réelles de faire et d'être qu'un individu peut exercer. L'inégalité ne se mesure pas seulement aux revenus mais aux libertés réelles. Une personne handicapée a besoin de plus de ressources pour atteindre la même liberté réelle qu'une personne valide.</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">🤔</div>
+            <div class="tip-text"><strong>Rawls vs Nozick :</strong> Rawls justifie la redistribution pour maximiser le bien-être des plus défavorisés — sans voile d'ignorance, ce serait la position rationnelle à choisir. Nozick y voit une violation des droits naturels de propriété : on ne peut pas forcer quelqu'un à contribuer au bien d'autrui. Ce débat structure toute la philosophie politique et économique contemporaine.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« Faut-il traiter tous les individus de manière identique ou différenciée pour parvenir à une société juste ? C'est la question centrale que posent les théories de la justice sociale, de Rawls à Sen. »</div>
+            <div class="bac-box bac-exemple"><div class="bac-label">📌 Exemple mobilisable</div>En France, la redistribution réduit le coefficient de Gini de 0,48 (revenus primaires) à 0,29 (revenus disponibles). Cela représente une réduction de 40 % des inégalités — l'une des plus fortes des pays de l'OCDE (rapport OCDE 2022).</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas confondre égalité formelle (même droit pour tous), égalité des chances (même point de départ) et égalité des situations (même résultat). Ces trois conceptions ont des implications politiques très différentes et peuvent s'opposer.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>3 conceptions : égalité formelle / égalité des chances (méritocratie) / égalité des situations (résultats)</li><li>Rawls : voile d'ignorance → principe de différence (inégalités justes si bénéficient aux plus défavorisés)</li><li>Nozick : libertarien — inégalités issues d'échanges libres = légitimes, redistribution forcée = injuste</li><li>Coefficient de Gini : 0 = égalité parfaite, 1 = inégalité maximale. France : ~0,29 revenus disponibles</li><li>Discrimination positive : logique d'équité, pas d'égalité — traiter différemment pour égaliser les chances</li></ul></div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "Le 'principe de différence' de Rawls signifie :", opts: ["Toutes les inégalités sont injustes","Les inégalités sont acceptables seulement si elles profitent aux membres les plus défavorisés de la société","Chacun doit recevoir selon ses besoins","Les différences de talents justifient toutes les inégalités"], ans: 1, exp: "Dans Théorie de la justice (1971), Rawls défend que les inégalités économiques ne sont légitimes que si elles améliorent la situation des personnes les moins avantagées. Ce principe de différence, choisi derrière un voile d'ignorance, suit une logique maximin : on maximise le minimum." },
+      { q: "L'égalité des chances (méritocratie) :", opts: ["Impose l'égalité des revenus pour tous","Accepte les inégalités de résultats si la compétition est équitable au départ","Garantit les mêmes revenus indépendamment du travail","Supprime toute forme de discrimination"], ans: 1, exp: "L'égalité des chances postule que les positions sociales doivent être accessibles à tous sur la base du mérite, quelle que soit l'origine. Elle accepte les inégalités de résultats à condition que la compétition soit équitable. Fondement de l'école républicaine, mais contestée par les données." },
+      { q: "Nozick s'oppose à la redistribution car :", opts: ["Elle n'est pas efficace économiquement","Elle constitue une violation des droits individuels issus d'échanges libres","Elle profite uniquement aux plus riches","Elle n'est pas assez importante"], ans: 1, exp: "Robert Nozick (Anarchie, État et Utopie, 1974) défend une vision libertarienne : les inégalités sont justes si elles résultent d'acquisitions et d'échanges libres. La redistribution forcée par l'État viole les droits de propriété des individus. Seul l'État minimal est légitime." },
+      { q: "Le coefficient de Gini mesure :", opts: ["Le niveau de pauvreté absolue","L'inégalité des revenus (0 = égalité parfaite, 1 = inégalité maximale)","Le taux de chômage structurel","La croissance économique"], ans: 1, exp: "Le coefficient de Gini est un indicateur statistique mesurant les inégalités de revenus ou de richesse. Il varie entre 0 et 1. En France, il est de ~0,29 pour les revenus disponibles (après redistribution) — la redistribution ayant réduit un Gini de revenus primaires de ~0,48." },
+      { q: "La discrimination positive consiste à :", opts: ["Pénaliser les groupes favorisés","Favoriser des groupes défavorisés pour compenser des inégalités de départ (ex : ZEP, quotas)","Supprimer toutes les distinctions entre groupes sociaux","Interdire la différenciation des salaires"], ans: 1, exp: "La discrimination positive désigne des mesures préférentielles au bénéfice de groupes structurellement désavantagés pour compenser des inégalités de départ. Ex : ZEP/REP+, quotas de genre dans les CA (loi Copé-Zimmermann, 2011). Logique d'équité plutôt que d'égalité formelle." }
+    ]
+  },
+  {
+    id: 12,
+    title: "Quelle action publique pour l'environnement ?",
+    color: "#5de8a0",
+    sections: [
+      {
+        icon: "🌿",
+        title: "Les défaillances du marché face à l'environnement",
+        content: `
+          <p class="desc">Le marché est incapable, seul, de préserver l'environnement. Cette incapacité résulte de trois défaillances fondamentales qui justifient l'intervention de l'État.</p>
+          <div class="actors-list">
+            <div class="actor-row" style="border-color:var(--accent3);">
+              <div class="actor-name">Externalités négatives (pollution)</div>
+              <div class="actor-desc">Une externalité négative est un coût imposé à des tiers sans compensation marchande. La pollution est l'exemple canonique : une usine produit en rejetant du CO₂, imposant des coûts à la société (santé, climat) qui ne figurent pas dans son prix de revient. Le prix de marché sous-évalue le vrai coût social → sur-production polluante. C'est la source principale de défaillance de marché environnementale.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent2);">
+              <div class="actor-name">Biens collectifs (non-rival, non-excluable)</div>
+              <div class="actor-desc">Les biens environnementaux (air pur, biodiversité, climat stable) sont non-rivaux (ma consommation ne réduit pas celle des autres) et non-excluables (impossible d'empêcher quelqu'un d'en bénéficier). Cette nature de "bien public" crée le problème du passager clandestin : chacun attend que les autres préservent ces biens, sans contribuer. Résultat : sous-production de biens environnementaux.</div>
+            </div>
+            <div class="actor-row" style="border-color:var(--accent4);">
+              <div class="actor-name">Tragédie des communs (Hardin, 1968)</div>
+              <div class="actor-desc">Les ressources communes (océans, forêts, atmosphère) sont surexploitées car chaque individu, maximisant son intérêt à court terme, dépasse la capacité de la ressource. La surpêche et l'exploitation forestière abusive en sont les exemples classiques. Elinor Ostrom (Nobel 2009) montre cependant que des communautés peuvent gérer efficacement les communs par des règles collectives négociées.</div>
+            </div>
+          </div>`
+      },
+      {
+        icon: "🔑",
+        title: "Les instruments de la politique environnementale",
+        content: `
+          <div class="kc-grid">
+            <div class="kc-card"><div class="kc-term">Réglementation (normes)</div><div class="kc-def">Approche directe (command and control) : normes d'émission, interdictions, standards techniques. Ex : normes Euro sur les véhicules (Euro 6), interdiction des sacs plastiques. Simple à mettre en œuvre mais peu flexible et peut freiner l'innovation.</div></div>
+            <div class="kc-card"><div class="kc-term">Taxe pigouvienne</div><div class="kc-def">Taxer la pollution d'un montant égal au coût externe généré → internalisation de l'externalité. Le pollueur intègre le coût social dans ses décisions. Incite à réduire les émissions jusqu'au niveau socialement optimal. Ex : taxe carbone française. Critique : détermine le prix mais pas la quantité d'émissions.</div></div>
+            <div class="kc-card"><div class="kc-term">Marchés de quotas d'émissions (ETS)</div><div class="kc-def">Système "cap and trade" : fixe un plafond total d'émissions (cap). Les entreprises reçoivent des droits à polluer échangeables. Celles qui polluent moins vendent leurs excédents → incitation économique à réduire. Ex : EU ETS, couvre ~40 % des émissions de l'UE. Critique : détermine la quantité mais pas le prix (volatilité).</div></div>
+            <div class="kc-card"><div class="kc-term">Accord de Paris (2015)</div><div class="kc-def">195 pays s'engagent à limiter le réchauffement à +1,5°C / +2°C. Via des Contributions Nationales Déterminées (NDC) : chaque pays fixe ses propres objectifs. Mécanisme de revue tous les 5 ans. Limite : non contraignant, absence de sanction en cas de non-respect.</div></div>
+            <div class="kc-card"><div class="kc-term">Théorème de Coase</div><div class="kc-def">Si les droits de propriété sont bien définis et les coûts de transaction nuls, les parties trouvent spontanément la solution optimale par la négociation. En pratique : coûts de transaction élevés, information asymétrique → le théorème s'applique rarement → intervention publique nécessaire.</div></div>
+            <div class="kc-card"><div class="kc-term">Gouvernance des communs (Ostrom)</div><div class="kc-def">Contre la "tragédie des communs" de Hardin, Ostrom montre que des communautés peuvent gérer efficacement des ressources communes par des règles collectives négociées. Ni marché (privatisation) ni État (nationalisation) — une troisième voie. Ex : coopératives de pêcheurs, gestion forestière communautaire.</div></div>
+          </div>
+          <div class="tip-box">
+            <div class="tip-icon">🌍</div>
+            <div class="tip-text"><strong>Taxe carbone vs quotas : quel instrument choisir ?</strong> La taxe pigouvienne fixe le prix (prévisibilité pour les entreprises) mais pas la quantité d'émissions. Les quotas fixent la quantité totale mais le prix fluctue. En pratique, les deux sont complémentaires. L'UE utilise les deux : EU ETS (quotas) + taxes carbone nationales.</div>
+          </div>
+          <div class="bac-grid" style="margin-top:.8rem;">
+            <div class="bac-box bac-accroche"><div class="bac-label">🎯 Accroche type bac</div>« Face à la crise climatique, le marché échoue : la pollution est une externalité négative que les prix ne prennent pas en compte spontanément. Seule l'action publique peut corriger cette défaillance fondamentale. »</div>
+            <div class="bac-box bac-mecanisme"><div class="bac-label">⚙️ Mécanisme à maîtriser</div>Taxe pigouvienne : Coût privé de production (bas) → Coût social (haut, incluant externalité) → L'entreprise produit trop → La taxe = coût externe → Le coût privé = coût social → L'entreprise réduit sa production polluante jusqu'au niveau socialement optimal. L'internalisation de l'externalité restaure l'optimalité.</div>
+            <div class="bac-box bac-exemple"><div class="bac-label">📌 Exemple mobilisable</div>L'EU ETS couvre environ 40 % des émissions de CO₂ de l'UE (industrie lourde, énergie, aviation). En 2023, le prix de la tonne de CO₂ a atteint 100 €, incitant les entreprises à accélérer leur transition énergétique. Le secteur de la construction sera intégré à partir de 2026 (ETS2).</div>
+            <div class="bac-box bac-piege"><div class="bac-label">⚠️ Piège à éviter</div>Ne pas confondre taxe pigouvienne (internalise l'externalité, incitative) et simple taxe fiscale (objectif de recettes). Une taxe pigouvienne doit être calibrée sur le coût externe réel pour être efficace. En France, la contribution énergie-climat n'a jamais atteint ce niveau.</div>
+            <div class="bac-box bac-retenir"><div class="bac-label">✅ Ce qu'il faut absolument retenir</div><ul><li>Marché défaillant face à l'environnement : externalités négatives, biens collectifs, tragédie des communs</li><li>3 instruments : réglementation (normes), taxe pigouvienne (prix), quotas d'émissions ETS (quantité)</li><li>Pigou (taxe) vs Coase (négociation privée si conditions réunies) vs Ostrom (gouvernance des communs)</li><li>Accord de Paris (2015) : +1,5°C / 2°C, NDC, mais non contraignant</li><li>EU ETS : plafonner + échanger — mécanisme de marché pour corriger une défaillance de marché</li></ul></div>
+          </div>`
+      }
+    ],
+    quiz: [
+      { q: "Une externalité négative environnementale est un coût :", opts: ["Supporté uniquement par l'entreprise polluante","Supporté par la société mais non intégré dans les prix du marché","Entièrement compensé par les taxes","Seulement présent dans les pays en développement"], ans: 1, exp: "Une externalité négative est un coût imposé à des tiers sans compensation marchande. La pollution : l'entreprise fait payer ses coûts environnementaux à la société sans que cela apparaisse dans son prix de revient → sur-production polluante car le coût privé < coût social." },
+      { q: "La 'tragédie des communs' (Hardin) désigne :", opts: ["La difficulté pour les États à s'entendre sur l'environnement","La surexploitation des ressources communes parce que chaque acteur maximise son intérêt individuel","L'échec des politiques de subvention verte","La privatisation des ressources naturelles"], ans: 1, exp: "Garrett Hardin (1968) montre que les ressources communes sont surexploitées car chaque individu, maximisant son intérêt à court terme, dépasse la capacité de la ressource. Ostrom conteste cette conclusion en montrant que des règles collectives permettent une gestion durable." },
+      { q: "La taxe pigouvienne vise à :", opts: ["Financer les dépenses de l'État","Internaliser les externalités négatives en rendant le pollueur payant","Subventionner les énergies renouvelables","Réguler le commerce international"], ans: 1, exp: "La taxe pigouvienne (du nom de l'économiste Pigou, 1920) consiste à taxer les activités polluantes d'un montant égal au coût externe généré. Elle internalise ainsi l'externalité : le coût privé = coût social → l'entreprise réduit sa production jusqu'au niveau socialement optimal." },
+      { q: "Le marché de quotas d'émissions (ETS) fonctionne en :", opts: ["Interdisant toute émission de CO₂ au-delà d'un seuil","Fixant un plafond global d'émissions et en permettant aux entreprises d'échanger leurs droits à polluer","Taxant toutes les entreprises de façon identique","Subventionnant les technologies vertes"], ans: 1, exp: "L'ETS (cap and trade) fixe un plafond total d'émissions. Les entreprises reçoivent ou achètent des droits à polluer échangeables. Celles qui polluent moins vendent leurs quotas excédentaires → incitation économique à réduire les émissions. L'EU ETS couvre ~40 % des émissions de l'UE." },
+      { q: "Le théorème de Coase affirme que :", opts: ["L'État doit toujours intervenir pour réguler la pollution","Si les droits de propriété sont bien définis et les coûts de transaction nuls, les parties trouvent une solution optimale","La taxe carbone est le seul instrument efficace","Les marchés ne peuvent jamais résoudre les problèmes environnementaux"], ans: 1, exp: "Le théorème de Coase (1960) montre que, si les droits de propriété sont clairs et les coûts de transaction nuls, les parties négocient spontanément une solution optimale sans intervention publique. En pratique, ces conditions sont rarement réunies → nécessité d'une intervention publique." }
+    ]
+  }
+];
+
+// STATE
+let activeChapter = null;
+let activeTab = 'revision';
+let quizState = {};
+
+function buildSidebar() {
+  const list = document.getElementById('chapter-list');
+  chapters.forEach(ch => {
+    const btn = document.createElement('button');
+    btn.className = 'chapter-btn';
+    btn.dataset.id = ch.id;
+    btn.innerHTML = `<span class="chapter-num">${ch.id}</span><span>${ch.title}</span>`;
+    btn.addEventListener('click', () => showChapter(ch.id));
+    list.appendChild(btn);
+  });
+}
+
+function showChapter(id) {
+  activeChapter = id;
+  document.getElementById('welcome').style.display = 'none';
+  document.getElementById('chapter-view').style.display = 'block';
+  document.querySelectorAll('.chapter-btn').forEach(b => b.classList.toggle('active', +b.dataset.id === id));
+  renderChapter(chapters.find(c => c.id === id));
+  document.getElementById('main').scrollTop = 0;
+}
+
+function renderChapter(ch) {
+  const view = document.getElementById('chapter-view');
+  view.innerHTML = `
+    <div class="chapter-view">
+      <div class="chapter-tag">📖 Chapitre ${ch.id} · SES Terminale</div>
+      <div class="chapter-title">${ch.title}</div>
+      <div class="tabs">
+        <button class="tab-btn ${activeTab==='revision'?'active':''}" onclick="switchTab('revision')">📚 Révision complète</button>
+        <button class="tab-btn ${activeTab==='quiz'?'active':''}" onclick="switchTab('quiz')">🎯 Quiz bac</button>
+      </div>
+      <div id="panel-revision" class="panel ${activeTab==='revision'?'active':''}">
+        ${renderRevision(ch)}
+      </div>
+      <div id="panel-quiz" class="panel ${activeTab==='quiz'?'active':''}">
+        ${renderQuiz(ch)}
+      </div>
+    </div>
+  `;
+  view.querySelectorAll('.notion-section-header').forEach(header => {
+    header.addEventListener('click', () => header.parentElement.classList.toggle('open'));
+  });
+  const first = view.querySelector('.notion-section');
+  if (first) first.classList.add('open');
+  attachQuizEvents(ch);
+}
+
+function renderRevision(ch) {
+  return `<div class="notion-grid">` +
+    ch.sections.map(s => `
+      <div class="notion-section">
+        <div class="notion-section-header">
+          <span class="notion-section-icon">${s.icon}</span>
+          <span>${s.title}</span>
+          <span class="notion-section-arrow">▾</span>
+        </div>
+        <div class="notion-section-body">
+          <div class="notion-section-content">${s.content}</div>
+        </div>
+      </div>
+    `).join('') + `</div>`;
+}
+
+function renderQuiz(ch) {
+  if (!quizState[ch.id]) quizState[ch.id] = { current: 0, answers: [], done: false, score: 0 };
+  const state = quizState[ch.id];
+  if (state.done) return renderResults(ch);
+  const q = ch.quiz[state.current];
+  const letters = ['A', 'B', 'C', 'D'];
+  const answered = state.answers[state.current] !== undefined;
+  const dots = ch.quiz.map((_, i) => `<div class="qp-dot ${i < state.current ? 'done' : i === state.current ? 'current' : ''}"></div>`).join('');
+  const opts = q.opts.map((o, i) => {
+    let cls = '';
+    if (answered) { if (i === q.ans) cls = 'correct'; else if (i === state.answers[state.current] && i !== q.ans) cls = 'wrong'; }
+    return `<button class="q-option ${cls}" data-opt="${i}" ${answered?'disabled':''}><span class="q-letter">${letters[i]}</span>${o}</button>`;
+  }).join('');
+  return `
+    <div class="quiz-container">
+      <div class="quiz-progress">${dots}</div>
+      <div class="q-card">
+        <div class="q-num">Question ${state.current+1} / ${ch.quiz.length}</div>
+        <div class="q-text">${q.q}</div>
+        <div class="q-options">${opts}</div>
+        <div class="q-explanation ${answered?'show':''}" id="q-exp"><strong>💡 Explication :</strong> ${q.exp}</div>
+      </div>
+      <div class="q-nav">
+        <button class="btn btn-secondary" onclick="resetQuiz(${ch.id})">↺ Recommencer</button>
+        ${answered ? `<button class="btn btn-primary" onclick="nextQuestion(${ch.id})">${state.current < ch.quiz.length-1 ? 'Question suivante →' : 'Voir les résultats'}</button>` : ''}
+        <div class="score-badge" style="color:var(--accent4);">✓ ${state.score} / ${state.current+(answered?1:0)}</div>
+      </div>
+    </div>`;
+}
+
+function renderResults(ch) {
+  const state = quizState[ch.id];
+  const pct = Math.round((state.score / ch.quiz.length) * 100);
+  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '👍' : '💪';
+  const msg = pct >= 80 ? 'Excellent ! Vous maîtrisez ce chapitre.' : pct >= 60 ? 'Bon résultat, continuez !' : 'À revoir ! Consultez la fiche de révision.';
+  return `<div class="results"><div class="results-icon">${emoji}</div><div class="results-score">${state.score} / ${ch.quiz.length}</div><div class="results-msg">${pct}% de bonnes réponses — ${msg}</div><button class="btn btn-primary" onclick="resetQuiz(${ch.id})" style="margin-top:1rem;">↺ Recommencer le quiz</button></div>`;
+}
+
+function attachQuizEvents(ch) {
+  document.querySelectorAll('.q-option').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const opt = +this.dataset.opt;
+      const state = quizState[ch.id];
+      if (state.answers[state.current] !== undefined) return;
+      state.answers[state.current] = opt;
+      if (opt === ch.quiz[state.current].ans) state.score++;
+      document.getElementById('panel-quiz').innerHTML = renderQuiz(ch);
+      attachQuizEvents(ch);
+    });
+  });
+}
+
+window.nextQuestion = function(id) {
+  const ch = chapters.find(c => c.id === id);
+  const state = quizState[id];
+  if (state.current < ch.quiz.length - 1) state.current++;
+  else state.done = true;
+  document.getElementById('panel-quiz').innerHTML = renderQuiz(ch);
+  attachQuizEvents(ch);
+};
+
+window.resetQuiz = function(id) {
+  quizState[id] = { current: 0, answers: [], done: false, score: 0 };
+  const ch = chapters.find(c => c.id === id);
+  document.getElementById('panel-quiz').innerHTML = renderQuiz(ch);
+  attachQuizEvents(ch);
+};
+
+window.switchTab = function(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', (tab==='revision' && b.textContent.includes('Révision')) || (tab==='quiz' && b.textContent.includes('Quiz'))));
+  document.getElementById('panel-revision').classList.toggle('active', tab === 'revision');
+  document.getElementById('panel-quiz').classList.toggle('active', tab === 'quiz');
+};
+
+buildSidebar();
+</script>
+</body>
+</html>
